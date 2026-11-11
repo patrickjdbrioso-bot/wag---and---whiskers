@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wag &amp; Whisker</title>
+<style>
+:root{--green:#17521C;--green2:#2E7D32;--cream:#F7F4E7;--yellow:#F3E6B2;--ink:#1E2B20;--muted:#4D5A4E;--line:#D5E0D8;--red:#B3261E;--white:#FFFFFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--white);color:var(--ink);font:16px/1.55 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px}
+h1,h2,h3{margin:0}
+h2{font-size:26px;text-transform:uppercase;color:var(--green2);letter-spacing:.5px;margin-bottom:12px}
+h3{font-size:20px;margin-bottom:6px}
+p{margin:0}
+button,.btn{font:inherit;font-weight:600;min-height:44px;padding:10px 20px;border-radius:999px;border:1.5px solid var(--green);background:var(--white);color:var(--green);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+button:disabled{opacity:.45;cursor:not-allowed}
+.btn.solid,button.solid{background:var(--green);color:var(--white);border-color:var(--green)}
+.btn.yellow{background:var(--yellow);color:var(--green);border-color:var(--yellow)}
+button.small{min-height:36px;padding:6px 14px;font-size:14px}
+button.link{border:0;background:none;color:var(--red);min-height:44px;padding:0 8px}
+.pill{font-size:14px;padding:8px 22px}
+.pill.on{background:var(--green);color:var(--white)}
+input,select,textarea{font:inherit;padding:12px 16px;border-radius:14px;border:1.5px solid #9DB0A2;background:var(--white);color:var(--ink);width:100%}
+textarea{min-height:80px;resize:vertical}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+
+/* header */
+header.top{background:var(--green);color:var(--white)}
+header.top .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-block:14px}
+.brand{font-weight:700;font-size:20px}
+nav.links{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;font-weight:500}
+nav.links a{text-decoration:none}
+nav.links a:hover{text-decoration:underline}
+.acct{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.acct button{background:var(--white);color:var(--green);border-color:var(--white);min-height:40px;padding:8px 16px}
+.acct button.ghost{background:transparent;color:var(--white);border-color:var(--white)}
+
+/* hero */
+.hero{background:var(--yellow)}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:32px}
+.hero .txt{flex:1 1 420px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.08;color:var(--green)}
+.hero h1 em{font-family:Georgia,serif;color:var(--green2)}
+.hero .art{flex:1 1 300px;display:flex;justify-content:center}
+.hero .art img{width:100%;max-width:380px}
+.search{max-width:520px;border-radius:999px;padding:14px 22px;border-color:var(--green)}
+
+/* info strip */
+.strip{background:var(--green);color:var(--white)}
+.strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.strip b{display:block;font-size:19px}
+.strip span{font-size:13px;color:#CFE3C8}
+
+/* quote + about */
+.quote .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px}
+.quote img{width:100%;max-width:260px;border-radius:24px}
+.quote p{flex:1 1 300px;max-width:520px;font:italic 600 26px/1.45 Georgia,serif;color:var(--ink)}
+.about{background:var(--cream)}
+.about .wrap{display:flex;flex-wrap:wrap;gap:36px;align-items:center}
+.about .txt{flex:1 1 300px;display:flex;flex-direction:column;gap:16px}
+.about .txt h2{font-size:36px;color:var(--ink)}
+.about .pics{flex:2 1 460px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.about .pics > div{border-radius:22px;overflow:hidden;background:var(--yellow)}
+.about .pics img{width:100%;height:100%;object-fit:cover;min-height:240px}
+.about .card{background:var(--green);color:var(--white);border-radius:22px;padding:24px 18px;display:flex;flex-direction:column;justify-content:center;gap:16px;text-align:center}
+.about .card small{color:#CFE3C8}
+
+/* products */
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sort{width:auto;min-height:40px;padding:6px 14px;border-radius:999px;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.card-p{background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.card-p .img{background:var(--cream);height:220px;display:flex;align-items:center;justify-content:center;padding:12px}
+.card-p .img img{max-height:200px;width:auto;object-fit:contain}
+.card-p .body{padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;flex:1}
+.card-p .tag{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green2)}
+.card-p .note{font-size:14px;color:var(--muted)}
+.card-p .price{font-weight:700}
+.card-p .inc{font-size:13px;font-weight:600;color:var(--green2)}
+.stars{color:#B7860B;font-weight:700}
+
+/* cart */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
+.panel{background:var(--cream);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.panel.plain{background:var(--white);border:1.5px solid var(--line)}
+.row{background:var(--white);border-radius:16px;padding:12px 14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.row .qty{display:flex;align-items:center;gap:8px}
+.row .qty button{width:44px;height:44px;padding:0;border-radius:50%;font-size:20px}
+.err{color:var(--red);font-weight:600;font-size:14px;min-height:0}
+.strong{font-weight:600;color:var(--green)}
+.muted{color:var(--muted);font-size:14px}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--cream);font-size:12px;font-weight:700;color:var(--green)}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{padding:6px 14px;border-radius:999px;background:var(--cream);font-size:13px;font-weight:600;color:var(--muted)}
+.step.on{background:var(--green);color:var(--white)}
+.stack{display:flex;flex-direction:column;gap:12px}
+
+/* offer */
+.offer{padding:8px 16px 40px}
+.offer .box{max-width:1180px;margin:0 auto;background:var(--green);color:var(--white);border-radius:26px;display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:24px 28px}
+.offer .box img{width:100%;max-width:240px;border-radius:18px;object-fit:cover;max-height:300px}
+.offer .txt{flex:1 1 280px;display:flex;flex-direction:column;gap:12px}
+.offer .txt em{font-family:Georgia,serif;color:var(--yellow);font-size:30px}
+.offer .txt b{font-size:28px;line-height:1.2}
+
+/* admin */
+#adminView[hidden],#track[hidden],#trackLink[hidden]{display:none}
+body.admin-mode > :not(header):not(#adminView){display:none}
+#adminView{max-width:1180px;margin:0 auto;padding:24px 16px;width:100%}
+.adm-card{background:var(--white);border:1.5px solid var(--line);border-radius:18px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.adm-card .wide{grid-column:1/-1}
+.adm-card label{font-size:13px}
+.adm-tools{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.msg{color:var(--green2);font-weight:600;font-size:14px}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.overlay[hidden]{display:none}
+#signupOnly.signup-fields{display:flex;flex-direction:column;gap:14px}
+#signupOnly[hidden]{display:none}
+.modal{background:var(--white);border-radius:24px;padding:28px;width:100%;max-width:420px;max-height:90vh;overflow:auto;display:flex;flex-direction:column;gap:14px}
+.modal.wide{max-width:600px}
+.modal .tabs{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.modal .x{border:0;background:none;font-size:28px;min-width:44px;min-height:44px;color:var(--ink);padding:0}
+
+footer{background:#143C1A;color:#CFE3C8;padding:28px 16px;font-size:14px}
+footer .wrap{padding:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer b{color:var(--white)}
+footer a{color:#CFE3C8}
+
+/* phones: bigger buttons, two product columns */
+@media (max-width:600px){
+  .wrap{padding:16px 14px}
+  button,.btn{min-height:48px}
+  h2{font-size:22px}
+  .hero h1{font-size:34px}
+  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .card-p .img{height:150px}
+  .card-p .img img{max-height:130px}
+  .card-p .body{padding:12px}
+  .modal{padding:20px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="wrap">
+<p class="brand">Wag &amp; Whisker</p>
+<nav class="links">
+<a href="#shop">Products</a>
+<a href="#about">About</a>
+<a href="#cart">Cart (<span id="cartCount">0</span>)</a>
+<a href="#track" id="trackLink">My orders</a>
+<a href="#visit">Contact</a>
+</nav>
+<div class="acct" id="acct"></div>
+</div>
+</header>
+
+<section class="hero" id="top">
+<div class="wrap">
+<div class="txt">
+<span class="muted" style="font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green2)">Your neighborhood pet shop</span>
+<h1>Make your <em>pet</em> happy.</h1>
+<p>Quality food, sturdy toys and honest advice for dogs and cats. Ask us anything in store.</p>
+<input class="search" id="search" type="search" placeholder="Search for pet food..." aria-label="Search products">
+</div>
+<div class="art"><img src="images/puppy-hero.png" alt="A happy golden retriever puppy sitting with its tongue out"></div>
+</div>
+</section>
+
+<section class="strip">
+<div class="wrap">
+<div><b>STI Novaliches</b><span>Address</span></div>
+<div><b>8 AM to 8 PM</b><span>Opening hours</span></div>
+<div><b>0956 694 9339</b><span>Phone</span></div>
+</div>
+</section>
+
+<section class="quote">
+<div class="wrap">
+<img src="images/dog-cat-car.jpg" alt="A white dog and an orange cat in white sunglasses looking out of a red car window">
+<p>Every dog and cat deserves the windows down, the sun out and a full bowl waiting at home.</p>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="wrap">
+<div class="txt">
+<h2>About us</h2>
+<p>Wag &amp; Whisker is a neighborhood pet shop in Novaliches. We stock food, toys and supplies for dogs and cats, and we take time to help you choose what suits your pet's age, size and habits.</p>
+<a class="btn solid" href="#visit" style="align-self:flex-start">Learn more</a>
+</div>
+<div class="pics">
+<div><img src="images/about-dog.jpg" alt="A dog wearing a red patterned headscarf and round gold glasses"></div>
+<div class="card">
+<div><b>Quality food</b><br><small>Brands we trust for everyday feeding</small></div>
+<div><b>Honest advice</b><br><small>Help picking what suits your pet</small></div>
+</div>
+<div><img src="images/about-cat.jpg" alt="A gray cat wearing an orange patterned silk scarf and orange sunglasses"></div>
+</div>
+</div>
+</section>
+
+<section class="wrap" id="shop">
+<div class="bar">
+<h2>Our products</h2>
+<div class="pills">
+<div class="pills" id="filters"></div>
+<select class="sort" id="sort" aria-label="Sort products">
+<option value="default">Sort: Featured</option>
+<option value="name">Name A to Z</option>
+<option value="asc">Price: low to high</option>
+<option value="desc">Price: high to low</option>
+</select>
+</div>
+</div>
+<div id="grid" class="grid"></div>
+</section>
+
+<section class="wrap" id="cart">
+<div class="two">
+<div class="panel">
+<h2>Your order</h2>
+<div id="cartLines" class="stack"></div>
+<p class="strong" id="cartTotal"></p>
+<p class="muted">Prices are confirmed by the shop when your order is received.</p>
+</div>
+<div class="panel plain" id="checkout"></div>
+</div>
+</section>
+
+<section class="wrap" id="track" hidden>
+<div class="panel plain">
+<h2>My orders</h2>
+<div id="myOrders" class="stack"></div>
+</div>
+</section>
+
+<section class="wrap" id="adminView" hidden></section>
+
+<section class="offer">
+<div class="box">
+<img src="images/offer-pets.jpg" alt="A golden retriever and a tabby cat lying among pet supplies">
+<div class="txt">
+<em>Special offers</em>
+<b>Ask about this month's deals on premium food</b>
+<a class="btn yellow" href="#visit" style="align-self:flex-start">Visit the shop</a>
+</div>
+</div>
+</section>
+
+<footer id="visit">
+<div class="wrap">
+<div><b>Wag &amp; Whisker</b><br>Food, toys and care for every pet in your home.<br><a href="#admin">Shop staff</a></div>
+<div><b>Contact us</b><br>Address: STI Novaliches<br>Hours: 8 AM to 8 PM<br>Phone: 0956 694 9339</div>
+</div>
+</footer>
+
+<!-- Sign up / log in pop-up -->
+<div class="overlay" id="auth" hidden>
+<div class="modal" role="dialog" aria-modal="true" aria-label="Account">
+<div class="tabs">
+<div class="pills">
+<button class="pill" id="tabSignup" data-auth="signup">Sign up</button>
+<button class="pill" id="tabLogin" data-auth="login">Log in</button>
+</div>
+<button class="x" aria-label="Close" data-close="1">&times;</button>
+</div>
+<div id="signupOnly" class="signup-fields">
+<label>Name<input id="aName" autocomplete="name"></label>
+<label>Phone number<input id="aPhone" type="tel" autocomplete="tel"></label>
+<label>Email<input id="aEmail" type="email" autocomplete="email"></label>
+</div>
+<label>Username<input id="aUser" autocomplete="username"></label>
+<label>Password (at least 6 characters)<input id="aPass" type="password"></label>
+<p class="err" id="aErr" role="alert"></p>
+<button class="solid" id="authGo" data-act="authGo" type="button">Create account</button>
+</div>
+</div>
+
+<!-- Product reviews pop-up -->
+<div class="overlay" id="prodModal" hidden>
+<div class="modal wide" id="prodBody" role="dialog" aria-modal="true"></div>
+</div>
+
+<script src="products.js"></script>
+<script>
+/* ===== Settings ===== */
+const SHOP_PHONE = '0956 694 9339';
+const SHOP_WA = '639566949339';          // WhatsApp number in international format (Philippines = 63)
+const ADMIN_PASSWORD = 'change-this-password'; // change this before you share the link with staff
+const STAGES = [['received','Received'],['confirmed','Confirmed'],['ready','Ready'],['completed','Completed']];
+const STAGE_TEXT = {
+  received: 'We got your order. We will text you to confirm the price and the pickup or delivery time.',
+  confirmed: 'Your price and time are confirmed. Please wait for our message.',
+  ready: 'Your order is ready for pickup, or on its way for delivery.',
+  completed: 'Thank you for shopping with us!'
+};
+
+/* ===== Helpers ===== */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money = (p) => p == null ? 'Ask in store' : '₱' + Number(p).toFixed(2);
+const dateText = (iso) => iso ? new Date(iso).toLocaleString('en-PH', {dateStyle:'medium', timeStyle:'short'}) : '';
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+};
+const allProducts = () => (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+const shopProducts = () => allProducts().filter((p) => p.active !== false);
+const findProduct = (id) => allProducts().find((p) => p.id === String(id));
+const reviewsFor = (id) => (typeof REVIEWS !== 'undefined' && REVIEWS[id]) || [];
+const avgRating = (list) => list.length ? list.reduce((n, r) => n + Number(r.rating), 0) / list.length : 0;
+const stepper = (status) => {
+  const idx = Math.max(0, STAGES.findIndex((s) => s[0] === status));
+  return '<div class="steps">' + STAGES.map((s, i) => '<span class="step ' + (i <= idx ? 'on' : '') + '">' + s[1] + '</span>').join('') + '</div>' +
+    '<p class="muted">' + esc(STAGE_TEXT[status] || STAGE_TEXT.received) + '</p>';
+};
+const waLink = (text) => 'https://wa.me/' + SHOP_WA + '?text=' + encodeURIComponent(text);
+
+/* ===== State ===== */
+const S = {
+  cart: store.get('ww_cart', {}), customer: store.get('ww_customer', null), pending: null,
+  filter: 'all', cat: 'all', sort: 'default', q: '',
+  mode: 'pickup', draft: {address: '', notes: ''}, checkErr: '', cartErr: '', lastOrder: null,
+  authMode: 'signup', authErr: '', reviewPid: null
+};
+const saveCart = () => store.set('ww_cart', S.cart);
+const cartCount = () => Object.keys(S.cart).reduce((n, k) => n + S.cart[k], 0);
+function cartTotal() {
+  let total = 0, unpriced = false;
+  Object.keys(S.cart).forEach((id) => {
+    const p = findProduct(id);
+    if (!p || p.price == null) unpriced = true; else total += p.price * S.cart[id];
+  });
+  return {total, unpriced};
+}
+
+/* ===== Accounts (saved in this browser) ===== */
+const accounts = () => store.get('ww_accounts', {});
+async function hashPw(salt, pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salt + ':' + pw));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+function openAuth(mode) {
+  $('auth').hidden = false;
+  setAuthMode(mode);
+  setTimeout(() => $('aUser').focus(), 0);
+}
+function setAuthMode(mode) {
+  S.authMode = mode;
+  $('signupOnly').hidden = mode !== 'signup';
+  $('authGo').textContent = mode === 'signup' ? 'Create account' : 'Log in';
+  $('tabSignup').className = 'pill' + (mode === 'signup' ? ' on' : '');
+  $('tabLogin').className = 'pill' + (mode === 'login' ? ' on' : '');
+  setAuthErr('');
+}
+function setAuthErr(t) { $('aErr').textContent = t; }
+function closeOverlays() { $('auth').hidden = true; $('prodModal').hidden = true; setAuthErr(''); }
+
+async function submitAuth() {
+  const mode = S.authMode;
+  const user = $('aUser').value.trim().toLowerCase();
+  const pass = $('aPass').value;
+  const name = $('aName').value.trim(), phone = $('aPhone').value.trim(), email = $('aEmail').value.trim();
+  let err = '';
+  if (!/^[a-z0-9_.-]{3,20}$/.test(user)) err = 'Username must be 3 to 20 letters, numbers, dots, dashes or underscores.';
+  else if (pass.length < 6) err = 'Password must be at least 6 characters.';
+  else if (mode === 'signup' && !name) err = 'Please enter your name.';
+  else if (mode === 'signup' && !/^[0-9+()\s-]{7,}$/.test(phone)) err = 'Please enter a valid phone number.';
+  else if (mode === 'signup' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) err = 'Please enter a valid email address.';
+  if (err) return setAuthErr(err);
+  try {
+    const acc = accounts();
+    let rec;
+    if (mode === 'signup') {
+      if (acc[user]) return setAuthErr('That username is taken. Try another, or log in.');
+      const salt = Array.from(crypto.getRandomValues(new Uint8Array(16))).map((b) => b.toString(16).padStart(2, '0')).join('');
+      rec = {salt: salt, hash: await hashPw(salt, pass), name: name, phone: phone, email: email};
+      acc[user] = rec;
+      if (!store.set('ww_accounts', acc)) return setAuthErr('Could not save your account in this browser.');
+    } else {
+      rec = acc[user];
+      if (!rec || (await hashPw(rec.salt, pass)) !== rec.hash) return setAuthErr('Wrong username or password.');
+    }
+    S.customer = {username: user, name: rec.name, phone: rec.phone, email: rec.email};
+    store.set('ww_customer', S.customer);
+    if (S.pending) { S.cart[S.pending] = (S.cart[S.pending] || 0) + 1; saveCart(); S.pending = null; }
+    $('aPass').value = '';
+    closeOverlays();
+    renderAll();
+  } catch (e) {
+    setAuthErr('Something went wrong. Please try again.');
+  }
+}
+function logout() {
+  S.customer = null; S.lastOrder = null; S.pending = null;
+  store.set('ww_customer', null);
+  renderAll();
+}
+
+/* ===== Cart and orders ===== */
+function addToCart(id) {
+  if (!S.customer) { S.pending = String(id); openAuth('signup'); return; }
+  S.cart[id] = (S.cart[id] || 0) + 1;
+  S.cartErr = ''; saveCart(); renderAll();
+}
+function changeQty(id, d) {
+  const cur = (S.cart[id] || 0) + d;
+  if (cur <= 0) delete S.cart[id]; else S.cart[id] = cur;
+  saveCart(); renderAll();
+}
+function placeOrder() {
+  if (!S.customer) return openAuth('signup');
+  if (!Object.keys(S.cart).length) { S.checkErr = 'Your cart is empty.'; return renderAll(); }
+  const address = S.draft.address.trim();
+  if (S.mode === 'delivery' && !address) { S.checkErr = 'Please enter a delivery address.'; return renderAll(); }
+  const t = cartTotal();
+  const order = {
+    id: Date.now().toString(36).toUpperCase(),
+    date: new Date().toISOString(),
+    username: S.customer.username,
+    name: S.customer.name, phone: S.customer.phone,
+    mode: S.mode, address: S.mode === 'delivery' ? address : '', notes: S.draft.notes.trim(),
+    items: Object.keys(S.cart).map((id) => {
+      const p = findProduct(id);
+      return {id: id, name: p ? p.name : id, qty: S.cart[id], price: p && p.price != null ? p.price : null};
+    }),
+    total: t.total, unpriced: t.unpriced, status: 'received'
+  };
+  const list = store.get('ww_orders', []);
+  list.unshift(order);
+  store.set('ww_orders', list);
+  S.cart = {}; saveCart();
+  S.lastOrder = order;
+  S.checkErr = ''; S.draft = {address: '', notes: ''};
+  renderAll();
+}
+function orderText(o) {
+  const lines = o.items.map((i) => i.price != null ? i.qty + ' x ' + i.name + ' = ' + money(i.price * i.qty) : i.qty + ' x ' + i.name);
+  return ['Wag & Whisker order #' + o.id].concat(lines, [
+    'Total: ' + money(o.total) + (o.unpriced ? ' (some prices to be confirmed)' : ''),
+    o.mode === 'delivery' ? 'Delivery to: ' + o.address : 'Pickup at STI Novaliches',
+    'Name: ' + o.name, 'Phone: ' + o.phone,
+    o.notes ? 'Notes: ' + o.notes : ''
+  ]).filter(Boolean).join('\n');
+}
+
+/* ===== Reviews ===== */
+function openReviews(id) {
+  const p = findProduct(id);
+  if (!p) return;
+  const list = reviewsFor(p.id);
+  const avg = avgRating(list);
+  const listHtml = list.length ? list.map((r) =>
+    '<div class="row" style="flex-direction:column;align-items:flex-start"><span class="stars">' + '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) + '</span>' +
+    '<b>' + esc(r.name || 'Customer') + '</b><p>' + esc(r.text) + '</p>' + (r.date ? '<small class="muted">' + esc(r.date) + '</small>' : '') + '</div>'
+  ).join('') : '<p>No reviews yet. Be the first to share your experience.</p>';
+  $('prodModal').hidden = false;
+  $('prodBody').innerHTML = '<div class="tabs"><h2 style="font-size:22px;margin:0">' + esc(p.name) + '</h2><button class="x" data-close="1" aria-label="Close">&times;</button></div>' +
+    '<p>' + (list.length ? '<span class="stars">' + avg.toFixed(1) + ' ★</span> from ' + list.length + ' review(s)' : 'No ratings yet') + '</p>' +
+    '<div class="stack">' + listHtml + '</div>' +
+    '<div class="stack" style="margin-top:8px"><h3>Write a review</h3>' +
+    '<label>Your name<input id="rvName" value="' + esc(S.customer ? S.customer.name : '') + '"></label>' +
+    '<label>Rating<select id="rvStars"><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Bad</option></select></label>' +
+    '<label>Your review<textarea id="rvText"></textarea></label>' +
+    '<p class="muted">Reviews are sent to the shop first and shown after we check them.</p>' +
+    '<button class="solid" data-act="sendReview" data-pid="' + esc(p.id) + '">Send review to the shop</button></div>';
+}
+
+/* ===== Rendering ===== */
+function renderAll() {
+  const adminMode = location.hash === '#admin';
+  document.body.classList.toggle('admin-mode', adminMode);
+  renderHeader(); renderFilters(); renderGrid(); renderCart(); renderTrack(); renderAdmin();
+}
+function renderHeader() {
+  $('cartCount').textContent = cartCount();
+  $('trackLink').hidden = !S.customer;
+  $('acct').innerHTML = S.customer
+    ? '<span>Hi, ' + esc(S.customer.name.split(' ')[0]) + '</span><button data-act="logout" class="ghost">Log out</button>'
+    : '<button data-act="login" class="ghost">Log in</button><button data-act="signup">Sign up</button>';
+}
+function renderFilters() {
+  const pets = [['all', 'All'], ['dogs', 'Dogs'], ['cats', 'Cats']];
+  const cats = [...new Set(shopProducts().map((p) => p.category).filter(Boolean))].sort();
+  $('filters').innerHTML = pets.map(([k, l]) => '<button class="pill ' + (S.filter === k ? 'on' : '') + '" data-filter="' + k + '">' + l + '</button>').join('') +
+    cats.map((c) => '<button class="pill ' + (S.cat === c ? 'on' : '') + '" data-cat="' + esc(c) + '">' + esc(c) + '</button>').join('');
+  $('sort').value = S.sort;
+}
+function renderGrid() {
+  const q = S.q.trim().toLowerCase();
+  let list = shopProducts().filter((p) =>
+    (S.filter === 'all' || p.pet === S.filter) &&
+    (S.cat === 'all' || p.category === S.cat) &&
+    (!q || p.name.toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q)));
+  if (S.sort === 'name') list = list.slice().sort((a, b) => a.name.localeCompare(b.name));
+  if (S.sort === 'asc') list = list.slice().sort((a, b) => (a.price == null) - (b.price == null) || (a.price || 0) - (b.price || 0));
+  if (S.sort === 'desc') list = list.slice().sort((a, b) => (a.price == null) - (b.price == null) || (b.price || 0) - (a.price || 0));
+  $('grid').innerHTML = list.length ? list.map((p) => {
+    const n = S.cart[p.id] || 0;
+    const rv = reviewsFor(p.id);
+    return '<article class="card-p"><div class="img">' + (p.image ? '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy">' : '') + '</div>' +
+      '<div class="body"><span class="tag">' + (p.pet === 'cats' ? 'Cat' : 'Dog') + ' · ' + esc(p.category) + '</span>' +
+      '<h3>' + esc(p.name) + '</h3><p class="note">' + esc(p.description) + '</p>' +
+      '<p class="price">' + money(p.price) + '</p>' +
+      (rv.length ? '<span class="stars">' + avgRating(rv).toFixed(1) + ' ★ (' + rv.length + ')</span>' : '') +
+      '<button class="solid small" data-add="' + esc(p.id) + '">Add to cart</button>' +
+      '<button class="small" data-reviews="' + esc(p.id) + '">Reviews</button>' +
+      (n ? '<span class="inc">In your order: ' + n + '</span>' : '') + '</div></article>';
+  }).join('') : '<p>No products match your search.</p>';
+}
+function renderCart() {
+  const ids = Object.keys(S.cart);
+  $('cartLines').innerHTML = (ids.length ? ids.map((id) => {
+    const p = findProduct(id);
+    return '<div class="row"><span>' + esc(p ? p.name : id) + '<br><small class="muted">' + (p ? money(p.price) : '') + '</small></span>' +
+      '<span class="qty"><button class="ghost" data-qty="' + esc(id) + '" data-d="-1">-</button>' + S.cart[id] +
+      '<button class="ghost" data-qty="' + esc(id) + '" data-d="1">+</button>' +
+      '<button class="link" data-remove="' + esc(id) + '">Remove</button></span></div>';
+  }).join('') : '<p>Your cart is empty. Choose products above and press Add to cart.</p>') +
+  (S.cartErr ? '<p class="err">' + esc(S.cartErr) + '</p>' : '');
+  const t = cartTotal();
+  $('cartTotal').textContent = ids.length ? 'Total: ' + money(t.total) + (t.unpriced ? ' (some prices to be confirmed)' : '') : '';
+  renderCheckout();
+}
+function renderCheckout() {
+  const box = $('checkout');
+  if (!S.customer) {
+    box.innerHTML = '<h2>Log in or sign up</h2>' +
+      '<p>Create an account or log in to add items and place your order.</p>' +
+      (S.pending ? '<p class="strong">Sign up or log in to add ' + esc((findProduct(S.pending) || {}).name || 'this product') + ' to your order.</p>' : '') +
+      '<div class="pills"><button class="solid" data-act="signup">Sign up</button><button data-act="login">Log in</button></div>';
+    return;
+  }
+  if (S.lastOrder) {
+    const o = S.lastOrder;
+    const text = orderText(o);
+    box.innerHTML = '<h2>Order received</h2>' + stepper(o.status) +
+      '<pre>' + esc(text) + '</pre>' +
+      '<p class="muted">Send this order to the shop so we can confirm it.</p>' +
+      '<div class="pills">' +
+      '<a class="btn solid" href="' + esc(waLink(text)) + '" target="_blank" rel="noopener">Send on WhatsApp</a>' +
+      '<a class="btn" href="sms:' + esc(SHOP_PHONE.replace(/\s/g, '')) + '?body=' + encodeURIComponent(text) + '">Text the shop</a>' +
+      '<button data-act="copyOrder">Copy order</button>' +
+      '<button data-act="newOrder">Start a new order</button></div>';
+    return;
+  }
+  const t = cartTotal();
+  box.innerHTML = '<h2>Checkout</h2>' +
+    '<div class="row"><span><b>' + esc(S.customer.name) + '</b><br><small class="muted">' + esc(S.customer.phone) + ' · ' + esc(S.customer.email) + '</small></span>' +
+    '<button class="ghost small" data-act="logout">Log out</button></div>' +
+    '<div class="pills">' + ['pickup', 'delivery'].map((m) => '<button class="pill ' + (S.mode === m ? 'on' : '') + '" data-mode="' + m + '">' + (m === 'pickup' ? 'Pickup' : 'Delivery') + '</button>').join('') + '</div>' +
+    (S.mode === 'delivery' ? '<label>Delivery address<input id="address" value="' + esc(S.draft.address) + '"></label>' : '') +
+    '<label>Notes (optional)<input id="notes" value="' + esc(S.draft.notes) + '"></label>' +
+    '<p class="strong">Pay ' + money(t.total) + ' when you pick up or when your order is delivered.</p>' +
+    '<p class="err">' + esc(S.checkErr) + '</p>' +
+    '<button class="solid" data-act="placeOrder"' + (Object.keys(S.cart).length ? '' : ' disabled') + '>Place order</button>';
+}
+function renderTrack() {
+  $('track').hidden = !S.customer;
+  if (!S.customer) return;
+  const mine = store.get('ww_orders', []).filter((o) => o.username === S.customer.username);
+  $('myOrders').innerHTML = mine.length ? mine.map((o) =>
+    '<div class="row" style="flex-direction:column;align-items:flex-start"><b>Order #' + esc(o.id) + ' · ' + dateText(o.date) + '</b>' +
+    '<small class="muted">' + esc(o.items.map((i) => i.qty + ' x ' + i.name).join(', ')) + ' · ' + money(o.total) + '</small>' +
+    stepper(o.status) + '</div>'
+  ).join('') : '<p>No orders yet.</p>';
+}
+
+/* ----- Shop staff page (#admin) ----- */
+const A = {
+  unlocked: sessionStorage.getItem('ww_admin') === '1',
+  draft: null,
+  msg: ''
+};
+function adminDraft() {
+  if (!A.draft) {
+    A.draft = store.get('ww_admin_draft', null) || {
+      products: JSON.parse(JSON.stringify(allProducts())),
+      reviews: JSON.parse(JSON.stringify(typeof REVIEWS !== 'undefined' ? REVIEWS : {}))
+    };
+  }
+  return A.draft;
+}
+function collectDraft() {
+  // read the product fields currently on the screen into the draft
+  const d = adminDraft();
+  d.products.forEach((p, i) => {
+    const get = (f) => document.querySelector('[data-f="' + f + '"][data-i="' + i + '"]');
+    if (!get('name')) return;
+    p.name = get('name').value.trim();
+    p.description = get('description').value.trim();
+    p.pet = get('pet').value;
+    p.category = get('category').value.trim() || 'Food';
+    p.price = get('price').value === '' ? null : Number(get('price').value);
+    p.image = get('image').value.trim();
+    p.active = get('active').checked;
+  });
+  return d;
+}
+function saveDraft() {
+  collectDraft();
+  A.msg = store.set('ww_admin_draft', A.draft) ? 'Saved on this device. Download products.js to put the changes on the website.' : 'Could not save.';
+  renderAll();
+}
+function downloadProducts() {
+  const d = collectDraft();
+  store.set('ww_admin_draft', d);
+  const code = '/* Wag & Whisker: product list and approved reviews.\n   Upload this file to GitHub next to index.html. */\n' +
+    'var PRODUCTS = ' + JSON.stringify(d.products, null, 2) + ';\n\n' +
+    'var REVIEWS = ' + JSON.stringify(d.reviews, null, 2) + ';\n';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([code], {type: 'text/javascript'}));
+  a.download = 'products.js';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  A.msg = 'products.js downloaded. Upload it to GitHub to update the website.';
+  renderAll();
+}
+function renderAdmin() {
+  const view = $('adminView');
+  const show = document.body.classList.contains('admin-mode');
+  view.hidden = !show;
+  if (!show) return;
+  if (!A.unlocked) {
+    view.innerHTML = '<div class="panel plain" style="max-width:420px;margin:0 auto"><h2>Shop staff</h2>' +
+      '<label>Password<input id="admPass" type="password"></label>' +
+      '<p class="err" id="admErr"></p><button class="solid" data-act="adminLogin">Open dashboard</button></div>';
+    return;
+  }
+  const d = adminDraft();
+  const products = d.products.map((p, i) =>
+    '<div class="adm-card">' +
+    '<label>Name<input data-f="name" data-i="' + i + '" value="' + esc(p.name) + '"></label>' +
+    '<label>Price (₱, empty = ask in store)<input data-f="price" data-i="' + i + '" type="number" min="0" step="0.01" value="' + esc(p.price == null ? '' : p.price) + '"></label>' +
+    '<label>Pet<select data-f="pet" data-i="' + i + '"><option value="dogs"' + (p.pet !== 'cats' ? ' selected' : '') + '>Dogs</option><option value="cats"' + (p.pet === 'cats' ? ' selected' : '') + '>Cats</option></select></label>' +
+    '<label>Category<input data-f="category" data-i="' + i + '" value="' + esc(p.category) + '"></label>' +
+    '<label class="wide">Description<textarea data-f="description" data-i="' + i + '">' + esc(p.description) + '</textarea></label>' +
+    '<label class="wide">Photo path (e.g. images/pedigree.jpg)<input data-f="image" data-i="' + i + '" value="' + esc(p.image) + '"></label>' +
+    '<label style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" data-f="active" data-i="' + i + '" style="width:auto"' + (p.active !== false ? ' checked' : '') + '> Show in shop</label>' +
+    '<div><button class="link" data-act="removeProduct" data-i="' + i + '">Remove product</button></div></div>'
+  ).join('');
+  const reviewRows = d.products.map((p) => (d.reviews[p.id] || []).map((r, idx) =>
+    '<div class="row"><span><b>' + esc(p.name) + '</b> · ' + '★'.repeat(r.rating) + ' · ' + esc(r.name) + '<br><small>' + esc(r.text) + '</small></span>' +
+    '<button class="link" data-act="removeReview" data-pid="' + esc(p.id) + '" data-idx="' + idx + '">Remove</button></div>'
+  ).join('')).join('');
+  const orders = store.get('ww_orders', []);
+  const orderRows = orders.length ? orders.map((o) =>
+    '<div class="row"><span><b>#' + esc(o.id) + '</b> · ' + dateText(o.date) + '<br><small>' + esc(o.items.map((i) => i.qty + ' x ' + i.name).join(', ')) + ' · ' + money(o.total) + ' · ' + esc(o.name) + ' ' + esc(o.phone) + '</small></span></div>'
+  ).join('') : '<p class="muted">No orders saved on this device yet. Customer orders arrive on WhatsApp.</p>';
+  view.innerHTML = '<h2>Shop staff</h2>' +
+    (A.msg ? '<p class="msg">' + esc(A.msg) + '</p>' : '') +
+    '<div class="adm-tools"><button class="solid" data-act="saveDraft">Save changes</button>' +
+    '<button class="solid" data-act="downloadProducts">Download products.js</button>' +
+    '<button data-act="addProduct">Add product</button>' +
+    '<button class="link" data-act="resetDraft">Reset to the website version</button>' +
+    '<button class="ghost" data-act="adminLock">Lock</button></div>' +
+    '<h3>Products</h3><div class="stack">' + (products || '<p>No products.</p>') + '</div>' +
+    '<h3 style="margin-top:24px">Add a review</h3>' +
+    '<div class="adm-card">' +
+    '<label>Product<select id="rvPid">' + d.products.map((p) => '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>').join('') + '</select></label>' +
+    '<label>Customer name<input id="rvName"></label>' +
+    '<label>Stars<select id="rvStars"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></label>' +
+    '<label class="wide">Review<textarea id="rvText"></textarea></label>' +
+    '<div class="wide"><button class="solid" data-act="addReview">Add review</button></div></div>' +
+    '<h3 style="margin-top:20px">Reviews on the website</h3><div class="stack">' + (reviewRows || '<p class="muted">No reviews yet.</p>') + '</div>' +
+    '<h3 style="margin-top:24px">Orders saved on this device</h3><div class="stack">' + orderRows + '</div>';
+}
+
+/* ===== Events ===== */
+const actions = {
+  login: () => openAuth('login'),
+  signup: () => openAuth('signup'),
+  logout: () => logout(),
+  authGo: () => submitAuth(),
+  placeOrder: () => placeOrder(),
+  newOrder: () => { S.lastOrder = null; S.mode = 'pickup'; renderAll(); },
+  copyOrder: () => {
+    if (!S.lastOrder) return;
+    try { navigator.clipboard.writeText(orderText(S.lastOrder)); } catch (e) {}
+    A.msg = '';
+    const b = document.activeElement; if (b) b.textContent = 'Copied';
+  },
+  sendReview: (b) => {
+    const p = findProduct(b.dataset.pid);
+    const text = $('rvText').value.trim();
+    if (!text) { alert('Please write a short review first.'); return; }
+    const msg = 'Review for ' + p.name + ': ' + $('rvStars').value + ' stars\n' + text + '\n— ' + $('rvName').value.trim();
+    window.open(waLink(msg), '_blank', 'noopener');
+  },
+  adminLogin: () => {
+    if (($('admPass') || {}).value === ADMIN_PASSWORD) {
+      A.unlocked = true; sessionStorage.setItem('ww_admin', '1'); renderAll();
+    } else {
+      $('admErr').textContent = 'Wrong password.';
+    }
+  },
+  adminLock: () => { A.unlocked = false; sessionStorage.removeItem('ww_admin'); renderAll(); },
+  saveDraft: () => saveDraft(),
+  downloadProducts: () => downloadProducts(),
+  addProduct: () => {
+    collectDraft();
+    adminDraft().products.push({id: 'p' + Date.now().toString(36), name: '', description: '', pet: 'dogs', category: 'Food', price: null, image: '', active: true});
+    renderAll();
+  },
+  removeProduct: (b) => {
+    collectDraft();
+    const d = adminDraft();
+    const p = d.products[Number(b.dataset.i)];
+    if (!p || !confirm('Remove ' + (p.name || 'this product') + '?')) return;
+    d.products.splice(Number(b.dataset.i), 1);
+    delete d.reviews[p.id];
+    renderAll();
+  },
+  resetDraft: () => {
+    if (!confirm('Throw away the changes you made here and go back to the website version?')) return;
+    store.set('ww_admin_draft', null);
+    A.draft = null; A.msg = '';
+    renderAll();
+  },
+  addReview: () => {
+    collectDraft();
+    const d = adminDraft();
+    const pid = $('rvPid').value, text = $('rvText').value.trim();
+    if (!text) { A.msg = 'Please write the review text.'; return renderAll(); }
+    d.reviews[pid] = d.reviews[pid] || [];
+    d.reviews[pid].push({name: $('rvName').value.trim() || 'Customer', rating: Number($('rvStars').value), text: text, date: new Date().toISOString().slice(0, 10)});
+    A.msg = 'Review added. Save changes, then download products.js.';
+    renderAll();
+  },
+  removeReview: (b) => {
+    collectDraft();
+    const list = adminDraft().reviews[b.dataset.pid] || [];
+    list.splice(Number(b.dataset.idx), 1);
+    renderAll();
+  }
+};
+
+document.addEventListener('click', (ev) => {
+  const b = ev.target.closest('button, a');
+  if (!b) {
+    if (ev.target.classList && ev.target.classList.contains('overlay')) closeOverlays();
+    return;
+  }
+  const d = b.dataset;
+  if (d.close) return closeOverlays();
+  if (d.auth) return setAuthMode(d.auth);
+  if (d.filter) { S.filter = d.filter; return renderAll(); }
+  if (d.cat) { S.cat = S.cat === d.cat ? 'all' : d.cat; return renderAll(); }
+  if (d.add) return addToCart(d.add);
+  if (d.qty) return changeQty(d.qty, Number(d.d));
+  if (d.remove) { delete S.cart[d.remove]; saveCart(); return renderAll(); }
+  if (d.reviews) return openReviews(d.reviews);
+  if (d.mode) { S.mode = d.mode; return renderAll(); }
+  if (d.act && actions[d.act]) return actions[d.act](b);
+});
+document.addEventListener('input', (ev) => {
+  const id = ev.target.id;
+  if (id === 'search') { S.q = ev.target.value; renderGrid(); }
+  else if (id === 'address' || id === 'notes') S.draft[id] = ev.target.value;
+});
+document.addEventListener('change', (ev) => {
+  if (ev.target.id === 'sort') { S.sort = ev.target.value; renderGrid(); }
+});
+document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeOverlays(); });
+window.addEventListener('hashchange', renderAll);
+
+/* ===== Start ===== */
+renderAll();
+</script>
+</body>
+</html>
