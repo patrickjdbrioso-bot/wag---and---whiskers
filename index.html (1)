@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wag &amp; Whisker</title>
+<style>
+:root{--green:#17521C;--green2:#2E7D32;--cream:#F7F4E7;--yellow:#F3E6B2;--ink:#1E2B20;--muted:#4D5A4E;--line:#D5E0D8;--red:#B3261E;--white:#FFFFFF}
+*{box-sizing:border-box}
+body{margin:0;background:var(--white);color:var(--ink);font:16px/1.55 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px}
+h1,h2,h3{margin:0}
+h2{font-size:26px;text-transform:uppercase;color:var(--green2);letter-spacing:.5px;margin-bottom:12px}
+p{margin:0}
+button,.btn{font:inherit;font-weight:600;min-height:44px;padding:10px 20px;border-radius:999px;border:1.5px solid var(--green);background:var(--white);color:var(--green);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.btn.solid,button.solid{background:var(--green);color:var(--white);border-color:var(--green)}
+.btn.yellow{background:var(--yellow);color:var(--green);border-color:var(--yellow)}
+button.small{min-height:36px;padding:6px 14px;font-size:14px}
+button.link{border:0;background:none;color:var(--red);min-height:44px;padding:0 8px}
+.pill{font-size:14px;padding:8px 22px}
+.pill.on{background:var(--green);color:var(--white)}
+input,select{font:inherit;padding:12px 16px;border-radius:14px;border:1.5px solid #9DB0A2;background:var(--white);color:var(--ink);width:100%}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+
+/* header */
+header.top{background:var(--green);color:var(--white)}
+header.top .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-block:14px}
+.brand{font-weight:700;font-size:20px}
+nav.links{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;font-weight:500}
+nav.links a{text-decoration:none}
+nav.links a:hover{text-decoration:underline}
+.acct{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.acct button{background:var(--white);color:var(--green);border-color:var(--white);min-height:40px;padding:8px 16px}
+.acct button.ghost{background:transparent;color:var(--white);border-color:var(--white)}
+
+/* hero */
+.hero{background:var(--yellow)}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:32px}
+.hero .txt{flex:1 1 420px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.hero h1{font-size:clamp(34px,6vw,60px);line-height:1.08;color:var(--green)}
+.hero h1 em{font-family:Georgia,serif;color:var(--green2)}
+.hero .art{flex:1 1 300px;display:flex;justify-content:center}
+.hero .art img{width:100%;max-width:380px}
+.search{max-width:520px;border-radius:999px;padding:14px 22px;border-color:var(--green)}
+
+/* info strip */
+.strip{background:var(--green);color:var(--white)}
+.strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.strip b{display:block;font-size:19px}
+.strip span{font-size:13px;color:#CFE3C8}
+
+/* quote + about */
+.quote .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px}
+.quote img{width:100%;max-width:260px;border-radius:24px}
+.quote p{flex:1 1 300px;max-width:520px;font:italic 600 26px/1.45 Georgia,serif;color:var(--ink)}
+.about{background:var(--cream)}
+.about .wrap{display:flex;flex-wrap:wrap;gap:36px;align-items:center}
+.about .txt{flex:1 1 300px;display:flex;flex-direction:column;gap:16px}
+.about .txt h2{font-size:36px;color:var(--ink)}
+.about .pics{flex:2 1 460px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+.about .pics > div{border-radius:22px;overflow:hidden;background:var(--yellow)}
+.about .pics img{width:100%;height:100%;object-fit:cover;min-height:240px}
+.about .card{background:var(--green);color:var(--white);border-radius:22px;padding:24px 18px;display:flex;flex-direction:column;justify-content:center;gap:16px;text-align:center}
+.about .card small{color:#CFE3C8}
+
+/* products */
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.card-p{background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.card-p .img{background:var(--cream);height:220px;display:flex;align-items:center;justify-content:center;padding:12px}
+.card-p .img img{max-height:200px;width:auto;object-fit:contain}
+.card-p .body{padding:16px;display:flex;flex-direction:column;gap:8px;align-items:flex-start;flex:1}
+.card-p .tag{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green2)}
+.card-p .note{font-size:14px;color:var(--muted)}
+.card-p .price{font-weight:700}
+.card-p .inc{font-size:13px;font-weight:600;color:var(--green2)}
+
+/* cart */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
+.panel{background:var(--cream);border-radius:24px;padding:24px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.panel.plain{background:var(--white);border:1.5px solid var(--line)}
+.row{background:var(--white);border-radius:16px;padding:12px 14px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.row .qty{display:flex;align-items:center;gap:8px}
+.row .qty button{width:44px;height:44px;padding:0;border-radius:50%;font-size:20px}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{padding:6px 14px;border-radius:999px;background:var(--cream);font-size:13px;font-weight:600;color:var(--muted)}
+.step.on{background:var(--green);color:var(--white)}
+.stack{display:flex;flex-direction:column;gap:12px}
+.err{color:var(--red);font-weight:600;font-size:14px;min-height:0}
+.strong{font-weight:600;color:var(--green)}
+pre{white-space:pre-wrap;word-break:break-word;background:var(--white);border-radius:16px;padding:14px;margin:0;font:inherit;font-size:14px}
+.muted{color:var(--muted);font-size:14px}
+
+/* offer */
+.offer{padding:8px 16px 40px}
+.offer .box{max-width:1180px;margin:0 auto;background:var(--green);color:var(--white);border-radius:26px;display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:24px 28px}
+.offer .box img{width:100%;max-width:240px;border-radius:18px;object-fit:cover;max-height:300px}
+.offer .txt{flex:1 1 280px;display:flex;flex-direction:column;gap:12px}
+.offer .txt em{font-family:Georgia,serif;color:var(--yellow);font-size:30px}
+.offer .txt b{font-size:28px;line-height:1.2}
+
+/* modal */
+.overlay{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.overlay[hidden]{display:none}
+#signupOnly.signup-fields{display:flex;flex-direction:column;gap:14px}
+#signupOnly[hidden]{display:none}
+.modal{background:var(--white);border-radius:24px;padding:28px;width:100%;max-width:420px;max-height:90vh;overflow:auto;display:flex;flex-direction:column;gap:14px}
+.modal .tabs{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.modal .x{border:0;background:none;font-size:28px;min-width:44px;min-height:44px;color:var(--ink);padding:0}
+
+footer{background:#143C1A;color:#CFE3C8;padding:28px 16px;font-size:14px}
+footer .wrap{padding:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+footer b{color:var(--white)}
+</style>
+</head>
+<body>
+
+<header class="top">
+<div class="wrap">
+<p class="brand">Wag &amp; Whisker</p>
+<nav class="links">
+<a href="#shop">Products</a>
+<a href="#about">About</a>
+<a href="#cart">Cart (<span id="cartCount">0</span>)</a>
+<a href="#visit">Contact</a>
+</nav>
+<div class="acct" id="acct"></div>
+</div>
+</header>
+
+<section class="hero" id="top">
+<div class="wrap">
+<div class="txt">
+<span class="muted" style="font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--green2)">Your neighborhood pet shop</span>
+<h1>Make your <em>pet</em> happy.</h1>
+<p>Quality food, sturdy toys and honest advice for dogs and cats. Ask us anything in store.</p>
+<input class="search" id="search" type="search" placeholder="Search for pet food..." aria-label="Search products">
+</div>
+<div class="art"><img src="images/puppy-hero.png" alt="A happy golden retriever puppy sitting with its tongue out"></div>
+</div>
+</section>
+
+<section class="strip">
+<div class="wrap">
+<div><b>STI Novaliches</b><span>Address</span></div>
+<div><b>8 AM to 8 PM</b><span>Opening hours</span></div>
+<div><b>0956 694 9339</b><span>Phone</span></div>
+</div>
+</section>
+
+<section class="quote">
+<div class="wrap">
+<img src="images/dog-cat-car.jpg" alt="A white dog and an orange cat in white sunglasses looking out of a red car window">
+<p>Every dog and cat deserves the windows down, the sun out and a full bowl waiting at home.</p>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="wrap">
+<div class="txt">
+<h2>About us</h2>
+<p>Wag &amp; Whisker is a neighborhood pet shop in Novaliches. We stock food, toys and supplies for dogs and cats, and we take time to help you choose what suits your pet's age, size and habits.</p>
+<a class="btn solid" href="#visit" style="align-self:flex-start">Learn more</a>
+</div>
+<div class="pics">
+<div><img src="images/about-dog.jpg" alt="A dog wearing a red patterned headscarf and round gold glasses"></div>
+<div class="card">
+<div><b>Quality food</b><br><small>Brands we trust for everyday feeding</small></div>
+<div><b>Honest advice</b><br><small>Help picking what suits your pet</small></div>
+</div>
+<div><img src="images/about-cat.jpg" alt="A gray cat wearing an orange patterned silk scarf and orange sunglasses"></div>
+</div>
+</div>
+</section>
+
+<section class="wrap" id="shop">
+<div class="bar">
+<h2>Our products</h2>
+<div class="pills">
+<button class="pill on" data-filter="all">All</button>
+<button class="pill" data-filter="dogs">Dogs</button>
+<button class="pill" data-filter="cats">Cats</button>
+</div>
+</div>
+<div id="grid" class="grid"></div>
+</section>
+
+<section class="wrap" id="cart">
+<div class="two">
+<div class="panel">
+<h2>Your order</h2>
+<div id="cartLines"></div>
+<p class="muted">Prices are confirmed by the shop when your order is received.</p>
+</div>
+<div class="panel plain" id="checkout"></div>
+</div>
+</section>
+
+<section class="wrap" id="track" hidden>
+<div class="panel plain">
+<h2>My orders</h2>
+<div id="myOrders" class="stack"></div>
+</div>
+</section>
+
+<section class="offer">
+<div class="box">
+<img src="images/offer-pets.jpg" alt="A golden retriever and a tabby cat lying among pet supplies">
+<div class="txt">
+<em>Special offers</em>
+<b>Ask about this month's deals on premium food</b>
+<a class="btn yellow" href="#visit" style="align-self:flex-start">Visit the shop</a>
+</div>
+</div>
+</section>
+
+<footer id="visit">
+<div class="wrap">
+<div><b>Wag &amp; Whisker</b><br>Food, toys and care for every pet in your home.</div>
+<div><b>Contact us</b><br>Address: STI Novaliches<br>Hours: 8 AM to 8 PM<br>Phone: 0956 694 9339</div>
+</div>
+</footer>
+
+<!-- login / sign-up pop-up -->
+<div class="overlay" id="auth" hidden>
+<div class="modal" role="dialog" aria-modal="true" aria-label="Account">
+<div class="tabs">
+<div class="pills">
+<button class="pill" id="tabSignup" data-auth="signup">Sign up</button>
+<button class="pill" id="tabLogin" data-auth="login">Log in</button>
+</div>
+<button class="x" aria-label="Close" data-close="1">&times;</button>
+</div>
+<div id="signupOnly" class="signup-fields">
+<label>Name<input id="aName" autocomplete="name"></label>
+<label>Phone number<input id="aPhone" type="tel" autocomplete="tel"></label>
+<label>Email<input id="aEmail" type="email" autocomplete="email"></label>
+</div>
+<label>Username<input id="aUser" autocomplete="username"></label>
+<label>Password (at least 6 characters)<input id="aPass" type="password"></label>
+<p class="err" id="aErr" role="alert"></p>
+<button class="solid" id="authGo" type="button">Create account</button>
+</div>
+</div>
+
+<script>
+const PRODUCTS = [
+{id:'pedigree', name:'Pedigree', pet:'dogs', price:200, note:'Dry and wet dog food for puppies and adult dogs.', img:'images/pedigree.jpg'},
+{id:'smartheart', name:'SmartHeart', pet:'dogs', price:250, note:'Dog food with protein, vitamins and minerals.', img:'images/smartheart.jpg'},
+{id:'vitality', name:'Vitality', pet:'dogs', price:120, note:'Dog food for everyday feeding.', img:'images/vitality.jpg'},
+{id:'nutrichunks', name:'Nutri Chunks', pet:'dogs', price:170, note:'Complete dog food in different varieties.', img:'images/nutrichunks.jpg'},
+{id:'royalcanin-dogs', name:'Royal Canin (dogs)', pet:'dogs', price:150, note:'Specialized nutrition for different dog breeds and sizes.', img:'images/royalcanin-dog.jpg'},
+{id:'whiskas', name:'Whiskas', pet:'cats', price:520, note:'Dry and wet food for cats.', img:'images/whiskas.jpg'},
+{id:'friskies', name:'Friskies', pet:'cats', price:420, note:'Cat food with different flavors.', img:'images/friskies.jpg'},
+{id:'me-o', name:'Me-O', pet:'cats', price:360, note:'Dry and wet cat food.', img:'images/meo.jpg'},
+{id:'royalcanin-cats', name:'Royal Canin (cats)', pet:'cats', price:380, note:'Specialized food for different cat breeds and life stages.', img:'images/royalcanin-cat.jpg'},
+{id:'sheba', name:'Sheba', pet:'cats', price:300, note:'Premium wet cat food.', img:'images/sheba.jpg'}
+];
+const SHOP_PHONE = '0956 694 9339';
+
+const STAGES = [['received','Received'],['confirmed','Confirmed'],['ready','Ready'],['completed','Completed']];
+const STAGE_TEXT = {
+received: 'We got your order. We will text you to confirm the price and the pickup or delivery time.',
+confirmed: 'Your price and time are confirmed. Please wait for our message.',
+ready: 'Your order is ready for pickup, or on its way for delivery.',
+completed: 'Thank you for shopping with us!'
+};
+function stepper(status) {
+const idx = Math.max(0, STAGES.findIndex((x) => x[0] === status));
+return '<div class="steps">' + STAGES.map((x, i) => '<span class="step ' + (i <= idx ? 'on' : '') + '">' + x[1] + '</span>').join('') + '</div>' +
+'<p class="muted">' + esc(STAGE_TEXT[status] || STAGE_TEXT.received) + '</p>';
+}
+const S = {cart:{}, customer:null, pending:null, filter:'all', q:'', mode:'pickup', placed:null, copied:false, orderErr:'', checkErr:'', authMode:'signup'};
+try { S.customer = JSON.parse(localStorage.getItem('ww_customer') || 'null'); } catch (e) { S.customer = null; }
+try { S.cart = JSON.parse(localStorage.getItem('ww_cart') || '{}'); } catch (e) { S.cart = {}; }
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const peso = (p) => '₱' + Number(p).toFixed(2);
+const cartCount = () => Object.keys(S.cart).reduce((n, k) => n + S.cart[k], 0);
+const saveCart = () => { try { localStorage.setItem('ww_cart', JSON.stringify(S.cart)); } catch (e) {} };
+const product = (id) => PRODUCTS.find((p) => p.id === id);
+
+/* ----- accounts (stored in this browser only) ----- */
+function accounts() { try { return JSON.parse(localStorage.getItem('ww_accounts') || '{}'); } catch (e) { return {}; } }
+function saveAccounts(a) { try { localStorage.setItem('ww_accounts', JSON.stringify(a)); return true; } catch (e) { return false; } }
+async function hashPw(salt, pw) {
+const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salt + ':' + pw));
+return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/* ----- render ----- */
+function renderHeader() {
+$('cartCount').textContent = cartCount();
+$('acct').innerHTML = S.customer
+  ? '<span>Hi, ' + esc(S.customer.name.split(' ')[0]) + '</span><button id="logout" class="ghost">Log out</button>'
+  : '<button id="openLogin" class="ghost">Log in</button><button id="openSignup">Sign up</button>';
+}
+function renderGrid() {
+const q = S.q.trim().toLowerCase();
+const list = PRODUCTS.filter((p) => (S.filter === 'all' || p.pet === S.filter) &&
+  (!q || p.name.toLowerCase().includes(q) || p.note.toLowerCase().includes(q)));
+$('grid').innerHTML = list.length ? list.map((p) => {
+  const n = S.cart[p.id] || 0;
+  return '<article class="card-p"><div class="img"><img src="' + esc(p.img) + '" alt="' + esc(p.name) + '"></div>' +
+    '<div class="body"><span class="tag">' + (p.pet === 'cats' ? 'Cat' : 'Dog') + '</span>' +
+    '<h3>' + esc(p.name) + '</h3><p class="note">' + esc(p.note) + '</p>' +
+    '<p class="price">' + (p.price == null ? 'Price: ask in store' : peso(p.price)) + '</p>' +
+    '<button class="solid small" data-add="' + p.id + '">Add to cart</button>' +
+    (n ? '<span class="inc">In your order: ' + n + '</span>' : '') + '</div></article>';
+}).join('') : '<p>No products match your search.</p>';
+}
+function renderCart() {
+const ids = Object.keys(S.cart);
+$('cartLines').innerHTML = ids.length ? ids.map((id) => {
+  const p = product(id);
+  return '<div class="row"><span>' + esc(p ? p.name : id) + '</span><span class="qty">' +
+    '<button class="ghost" data-qty="' + id + '" data-d="-1">-</button>' + S.cart[id] +
+    '<button class="ghost" data-qty="' + id + '" data-d="1">+</button>' +
+    '<button class="link" data-remove="' + id + '">Remove</button></span></div>';
+}).join('') : '<p>Your cart is empty. Choose products above and press Add to cart.</p>';
+renderCheckout();
+}
+function renderCheckout() {
+const box = $('checkout');
+if (!S.customer) {
+  box.innerHTML = '<h2>Log in <span style="color:var(--ink)">or sign up</span></h2>' +
+    '<p>Create an account or log in with your username and password to place your order.</p>' +
+    (S.pending ? '<p class="strong">Sign up or log in to add ' + esc(product(S.pending).name) + ' to your order.</p>' : '') +
+    '<div class="pills"><button class="solid" id="openSignup2">Sign up</button><button id="openLogin2">Log in</button></div>';
+  return;
+}
+if (S.placed) {
+  const sms = 'sms:' + SHOP_PHONE.replace(/\s/g, '') + '?body=' + encodeURIComponent(S.placed);
+  const last = ordersList().find((o) => o.id === S.lastOrderId);
+  box.innerHTML = '<h2>Order saved</h2>' + (last ? stepper(last.status) : '') +
+    '<p>We will confirm the price and the pickup or delivery time. You can also text it to ' + SHOP_PHONE + '.</p>' +
+    '<pre>' + esc(S.placed) + '</pre>' +
+    '<div class="pills"><button class="solid" id="copyOrder">' + (S.copied ? 'Copied' : 'Copy order') + '</button>' +
+    '<a class="btn" href="' + esc(sms) + '">Text this order</a>' +
+    '<button id="newOrder">Start a new order</button></div>';
+  return;
+}
+box.innerHTML = '<h2>Your details</h2>' +
+  '<div class="row"><span><b>' + esc(S.customer.name) + '</b><br><small class="muted">' + esc(S.customer.phone) + ' · ' + esc(S.customer.email) + '</small></span>' +
+  '<button class="ghost small" id="logout2">Sign out</button></div>' +
+  '<div class="pills">' + ['pickup', 'delivery'].map((m) =>
+    '<button class="pill ' + (S.mode === m ? 'on' : '') + '" data-mode="' + m + '">' + (m === 'pickup' ? 'Pickup' : 'Delivery') + '</button>').join('') + '</div>' +
+  (S.mode === 'delivery' ? '<label>Delivery address<input id="address"></label>' : '') +
+  '<label>Notes (optional)<input id="notes"></label>' +
+  '<p class="err">' + esc(S.checkErr) + '</p>' +
+  '<button class="solid" id="placeOrder">Place order</button>';
+}
+function ordersList() { try { return JSON.parse(localStorage.getItem('ww_orders') || '[]'); } catch (e) { return []; } }
+function renderTrack() {
+$('track').hidden = !S.customer;
+if (!S.customer) return;
+const mine = ordersList().filter((o) => o.username === S.customer.username);
+$('myOrders').innerHTML = mine.length ? mine.map((o) =>
+  '<div class="row" style="flex-direction:column;align-items:flex-start"><b>Order #' + esc(o.id) + ' · ' + new Date(o.date).toLocaleString('en-PH', {dateStyle: 'medium', timeStyle: 'short'}) + '</b>' +
+  '<small class="muted">' + esc(o.items.map((i) => i.qty + ' x ' + i.name).join(', ')) + (o.total ? ' · ' + peso(o.total) : '') + '</small>' +
+  stepper(o.status) + '</div>'
+).join('') : '<p>No orders yet.</p>';
+}
+function renderAll() { renderHeader(); renderGrid(); renderCart(); renderTrack(); }
+
+/* ----- actions ----- */
+function openAuth(mode) {
+S.authMode = mode;
+$('auth').hidden = false;
+setAuthMode(mode);
+setTimeout(() => $('aUser').focus(), 0);
+}
+function closeAuth() { $('auth').hidden = true; $('aErr').textContent = ''; }
+function setAuthMode(mode) {
+S.authMode = mode;
+$('signupOnly').hidden = mode !== 'signup';
+$('authGo').textContent = mode === 'signup' ? 'Create account' : 'Log in';
+$('tabSignup').className = 'pill' + (mode === 'signup' ? ' on' : '');
+$('tabLogin').className = 'pill' + (mode === 'login' ? ' on' : '');
+$('aErr').textContent = '';
+}
+async function submitAuth() {
+const mode = S.authMode;
+const user = $('aUser').value.trim().toLowerCase();
+const pass = $('aPass').value;
+const name = $('aName').value.trim(), phone = $('aPhone').value.trim(), email = $('aEmail').value.trim();
+let err = '';
+if (!/^[a-z0-9_.-]{3,20}$/.test(user)) err = 'Username must be 3 to 20 letters, numbers, dots, dashes or underscores.';
+else if (pass.length < 6) err = 'Password must be at least 6 characters.';
+else if (mode === 'signup' && !name) err = 'Please enter your name.';
+else if (mode === 'signup' && !/^[0-9+()\s-]{7,}$/.test(phone)) err = 'Please enter a valid phone number.';
+else if (mode === 'signup' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) err = 'Please enter a valid email address.';
+if (err) { $('aErr').textContent = err; return; }
+try {
+  const acc = accounts();
+  let rec;
+  if (mode === 'signup') {
+    if (acc[user]) { $('aErr').textContent = 'That username is taken. Try another, or log in.'; return; }
+    const salt = Array.from(crypto.getRandomValues(new Uint8Array(16))).map((b) => b.toString(16).padStart(2, '0')).join('');
+    rec = {salt: salt, hash: await hashPw(salt, pass), name: name, phone: phone, email: email};
+    acc[user] = rec;
+    if (!saveAccounts(acc)) { $('aErr').textContent = 'Could not save your account in this browser.'; return; }
+  } else {
+    rec = acc[user];
+    if (!rec || (await hashPw(rec.salt, pass)) !== rec.hash) { $('aErr').textContent = 'Wrong username or password.'; return; }
+  }
+  S.customer = {username: user, name: rec.name, phone: rec.phone, email: rec.email};
+  localStorage.setItem('ww_customer', JSON.stringify(S.customer));
+  if (S.pending) { S.cart[S.pending] = (S.cart[S.pending] || 0) + 1; saveCart(); S.pending = null; }
+  $('aPass').value = ''; $('aUser').value = '';
+  closeAuth();
+  renderAll();
+} catch (e) {
+  $('aErr').textContent = 'Something went wrong. Please try again.';
+}
+}
+function logout() {
+try { localStorage.removeItem('ww_customer'); } catch (e) {}
+S.customer = null; S.placed = null; S.pending = null; S.copied = false; S.checkErr = ''; S.lastOrderId = null;
+renderAll();
+}
+function addToCart(id) {
+if (!S.customer) { S.pending = id; openAuth('signup'); renderCheckout(); return; }
+S.cart[id] = (S.cart[id] || 0) + 1; saveCart(); renderAll();
+}
+function changeQty(id, d) {
+const n = (S.cart[id] || 0) + d;
+if (n <= 0) delete S.cart[id]; else S.cart[id] = n;
+saveCart(); renderAll();
+}
+function placeOrder() {
+S.checkErr = '';
+const ids = Object.keys(S.cart);
+if (!ids.length) S.checkErr = 'Add at least one item to your order.';
+else if (S.mode === 'delivery' && !($('address') && $('address').value.trim())) S.checkErr = 'Please enter your delivery address.';
+if (S.checkErr) { renderCheckout(); return; }
+const lines = ids.map((id) => '- ' + S.cart[id] + ' x ' + (product(id) ? product(id).name : id)).join('\n');
+const addr = S.mode === 'delivery' ? $('address').value.trim() : '';
+const notes = $('notes') ? $('notes').value.trim() : '';
+S.placed = 'New order - Wag & Whisker\nName: ' + S.customer.name + '\nPhone: ' + S.customer.phone + '\nEmail: ' + S.customer.email + '\n' +
+  (S.mode === 'delivery' ? 'Delivery to: ' + addr : 'Pickup at STI Novaliches') + '\nItems:\n' + lines + (notes ? '\nNotes: ' + notes : '');
+const order = {id: Date.now().toString(36).toUpperCase(), date: new Date().toISOString(), username: S.customer.username,
+  name: S.customer.name, items: ids.map((id) => ({qty: S.cart[id], name: product(id) ? product(id).name : id, price: product(id) ? product(id).price : null})),
+  total: ids.reduce((n, id) => n + (product(id) && product(id).price != null ? product(id).price * S.cart[id] : 0), 0), status: 'received'};
+let orders = []; try { orders = JSON.parse(localStorage.getItem('ww_orders') || '[]'); } catch (e) { orders = []; }
+orders.unshift(order);
+try { localStorage.setItem('ww_orders', JSON.stringify(orders)); } catch (e) {}
+S.lastOrderId = order.id;
+S.cart = {}; saveCart(); S.copied = false;
+renderAll();
+}
+
+/* ----- events ----- */
+document.addEventListener('click', (ev) => {
+const t = ev.target;
+const b = t.closest('button, a');
+if (!b) return;
+if (b.dataset.close) { closeAuth(); return; }
+if (b.dataset.auth) { setAuthMode(b.dataset.auth); return; }
+if (b.dataset.filter) { S.filter = b.dataset.filter; document.querySelectorAll('[data-filter]').forEach((x) => x.className = 'pill' + (x === b ? ' on' : '')); renderGrid(); return; }
+if (b.dataset.add) { addToCart(b.dataset.add); return; }
+if (b.dataset.qty) { changeQty(b.dataset.qty, Number(b.dataset.d)); return; }
+if (b.dataset.remove) { delete S.cart[b.dataset.remove]; saveCart(); renderAll(); return; }
+if (b.dataset.mode) { S.mode = b.dataset.mode; S.checkErr = ''; renderCheckout(); return; }
+switch (b.id) {
+  case 'openLogin': case 'openLogin2': openAuth('login'); break;
+  case 'openSignup': case 'openSignup2': openAuth('signup'); break;
+  case 'logout': case 'logout2': logout(); break;
+  case 'authGo': submitAuth(); break;
+  case 'placeOrder': placeOrder(); break;
+  case 'newOrder': S.placed = null; S.mode = 'pickup'; renderCheckout(); break;
+  case 'copyOrder':
+    try { navigator.clipboard.writeText(S.placed).then(() => { S.copied = true; renderCheckout(); }, () => {}); } catch (e) {}
+    break;
+}
+});
+document.addEventListener('keydown', (ev) => {
+if (ev.key === 'Escape' && !$('auth').hidden) closeAuth();
+});
+$('auth').addEventListener('click', (ev) => { if (ev.target.id === 'auth') closeAuth(); });
+$('search').addEventListener('input', (ev) => { S.q = ev.target.value; renderGrid(); });
+
+renderAll();
+</script>
+</body>
+</html>
