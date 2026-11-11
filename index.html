@@ -24,7 +24,7 @@ button.link{border:0;background:none;color:var(--red);min-height:44px;padding:0 
 .pill{font-size:14px;padding:8px 22px}
 .pill.on{background:var(--green);color:var(--white)}
 input,select,textarea{font:inherit;padding:12px 16px;border-radius:14px;border:1.5px solid #9DB0A2;background:var(--white);color:var(--ink);width:100%}
-textarea{min-height:90px;resize:vertical}
+textarea{min-height:80px;resize:vertical}
 label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
 :focus-visible{outline:3px solid var(--green);outline-offset:2px}
 
@@ -71,7 +71,8 @@ nav.links a:hover{text-decoration:underline}
 
 /* products */
 .bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
-.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sort{width:auto;min-height:40px;padding:6px 14px;border-radius:999px;font-size:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
 .card-p{background:var(--white);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
 .card-p .img{background:var(--cream);height:220px;display:flex;align-items:center;justify-content:center;padding:12px}
@@ -81,6 +82,7 @@ nav.links a:hover{text-decoration:underline}
 .card-p .note{font-size:14px;color:var(--muted)}
 .card-p .price{font-weight:700}
 .card-p .inc{font-size:13px;font-weight:600;color:var(--green2)}
+.stars{color:#B7860B;font-weight:700}
 
 /* cart */
 .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
@@ -90,16 +92,13 @@ nav.links a:hover{text-decoration:underline}
 .row .qty{display:flex;align-items:center;gap:8px}
 .row .qty button{width:44px;height:44px;padding:0;border-radius:50%;font-size:20px}
 .err{color:var(--red);font-weight:600;font-size:14px;min-height:0}
-.msg{color:var(--green2);font-weight:600;font-size:14px}
 .strong{font-weight:600;color:var(--green)}
-pre{white-space:pre-wrap;word-break:break-word;background:var(--white);border-radius:16px;padding:14px;margin:0;font:inherit;font-size:14px}
 .muted{color:var(--muted);font-size:14px}
-.stars{color:#B7860B;font-weight:700}
 .badge{display:inline-block;padding:2px 10px;border-radius:999px;background:var(--cream);font-size:12px;font-weight:700;color:var(--green)}
-.badge.warn{background:#FCE8E6;color:var(--red)}
-.badge.ok{background:#E3F2E5;color:var(--green2)}
-.gcash{display:flex;flex-wrap:wrap;gap:16px;align-items:center;background:var(--cream);border-radius:18px;padding:16px}
-.gcash img{width:160px;max-width:40%;border-radius:14px;background:var(--white)}
+.steps{display:flex;flex-wrap:wrap;gap:8px}
+.step{padding:6px 14px;border-radius:999px;background:var(--cream);font-size:13px;font-weight:600;color:var(--muted)}
+.step.on{background:var(--green);color:var(--white)}
+.stack{display:flex;flex-direction:column;gap:12px}
 
 /* offer */
 .offer{padding:8px 16px 40px}
@@ -110,21 +109,14 @@ pre{white-space:pre-wrap;word-break:break-word;background:var(--white);border-ra
 .offer .txt b{font-size:28px;line-height:1.2}
 
 /* admin */
-#adminView[hidden],#track[hidden],#adminLink[hidden]{display:none}
+#adminView[hidden],#track[hidden],#trackLink[hidden]{display:none}
 body.admin-mode > :not(header):not(#adminView){display:none}
 #adminView{max-width:1180px;margin:0 auto;padding:24px 16px;width:100%}
-.tabs-a{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px;align-items:center}
-.admin-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);gap:24px;align-items:start}
-@media (max-width:820px){.admin-grid{grid-template-columns:1fr}}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:16px}
-table{width:100%;border-collapse:collapse;font-size:14px}
-th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
-th{background:var(--cream)}
-tr.low td{background:#FFF7E0}
-.order-card{background:var(--white);border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px}
-.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
-.kv b{color:var(--muted)}
-.stat{font-size:28px;font-weight:700;color:var(--green)}
+.adm-card{background:var(--white);border:1.5px solid var(--line);border-radius:18px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.adm-card .wide{grid-column:1/-1}
+.adm-card label{font-size:13px}
+.adm-tools{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.msg{color:var(--green2);font-weight:600;font-size:14px}
 
 /* modal */
 .overlay{position:fixed;inset:0;background:rgba(20,40,25,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
@@ -139,6 +131,20 @@ tr.low td{background:#FFF7E0}
 footer{background:#143C1A;color:#CFE3C8;padding:28px 16px;font-size:14px}
 footer .wrap{padding:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
 footer b{color:var(--white)}
+footer a{color:#CFE3C8}
+
+/* phones: bigger buttons, two product columns */
+@media (max-width:600px){
+  .wrap{padding:16px 14px}
+  button,.btn{min-height:48px}
+  h2{font-size:22px}
+  .hero h1{font-size:34px}
+  .grid{grid-template-columns:1fr 1fr;gap:12px}
+  .card-p .img{height:150px}
+  .card-p .img img{max-height:130px}
+  .card-p .body{padding:12px}
+  .modal{padding:20px}
+}
 </style>
 </head>
 <body>
@@ -151,7 +157,6 @@ footer b{color:var(--white)}
 <a href="#cart">Cart (<span id="cartCount">0</span>)</a>
 <a href="#track" id="trackLink">My orders</a>
 <a href="#visit">Contact</a>
-<a href="#admin" id="adminLink" hidden>Admin</a>
 </nav>
 <div class="acct" id="acct"></div>
 </div>
@@ -205,7 +210,15 @@ footer b{color:var(--white)}
 <section class="wrap" id="shop">
 <div class="bar">
 <h2>Our products</h2>
+<div class="pills">
 <div class="pills" id="filters"></div>
+<select class="sort" id="sort" aria-label="Sort products">
+<option value="default">Sort: Featured</option>
+<option value="name">Name A to Z</option>
+<option value="asc">Price: low to high</option>
+<option value="desc">Price: high to low</option>
+</select>
+</div>
 </div>
 <div id="grid" class="grid"></div>
 </section>
@@ -214,7 +227,7 @@ footer b{color:var(--white)}
 <div class="two">
 <div class="panel">
 <h2>Your order</h2>
-<div id="cartLines"></div>
+<div id="cartLines" class="stack"></div>
 <p class="strong" id="cartTotal"></p>
 <p class="muted">Prices are confirmed by the shop when your order is received.</p>
 </div>
@@ -225,7 +238,7 @@ footer b{color:var(--white)}
 <section class="wrap" id="track" hidden>
 <div class="panel plain">
 <h2>My orders</h2>
-<div id="myOrders"></div>
+<div id="myOrders" class="stack"></div>
 </div>
 </section>
 
@@ -244,7 +257,7 @@ footer b{color:var(--white)}
 
 <footer id="visit">
 <div class="wrap">
-<div><b>Wag &amp; Whisker</b><br>Food, toys and care for every pet in your home.</div>
+<div><b>Wag &amp; Whisker</b><br>Food, toys and care for every pet in your home.<br><a href="#admin">Shop staff</a></div>
 <div><b>Contact us</b><br>Address: STI Novaliches<br>Hours: 8 AM to 8 PM<br>Phone: 0956 694 9339</div>
 </div>
 </footer>
@@ -262,9 +275,10 @@ footer b{color:var(--white)}
 <div id="signupOnly" class="signup-fields">
 <label>Name<input id="aName" autocomplete="name"></label>
 <label>Phone number<input id="aPhone" type="tel" autocomplete="tel"></label>
-</div>
 <label>Email<input id="aEmail" type="email" autocomplete="email"></label>
-<label>Password (at least 6 characters)<input id="aPass" type="password" autocomplete="current-password"></label>
+</div>
+<label>Username<input id="aUser" autocomplete="username"></label>
+<label>Password (at least 6 characters)<input id="aPass" type="password"></label>
 <p class="err" id="aErr" role="alert"></p>
 <button class="solid" id="authGo" data-act="authGo" type="button">Create account</button>
 </div>
@@ -275,71 +289,49 @@ footer b{color:var(--white)}
 <div class="modal wide" id="prodBody" role="dialog" aria-modal="true"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="products.js"></script>
 <script>
 /* ===== Settings ===== */
-const SB_URL = "https://kgjnczxlqfvjvbqrvmzj.supabase.co";
-const SB_KEY = "sb_publishable_fIJy-uFGOCvYLnxaBoY8Hw_IlLjAPh1";
 const SHOP_PHONE = '0956 694 9339';
-const GCASH_NUMBER = ''; // type the shop's GCash number here, e.g. '0917 000 0000'
-const LOW_STOCK = 5;
-
-/* Built-in products, used if the database cannot be reached */
-const BUILTIN = [
-{id:'pedigree', name:'Pedigree', pet:'dogs', category:'Food', price:200, description:'Dry and wet dog food for puppies and adult dogs.', image_url:'images/pedigree.jpg'},
-{id:'smartheart', name:'SmartHeart', pet:'dogs', category:'Food', price:250, description:'Dog food with protein, vitamins and minerals.', image_url:'images/smartheart.jpg'},
-{id:'vitality', name:'Vitality', pet:'dogs', category:'Food', price:120, description:'Dog food for everyday feeding.', image_url:'images/vitality.jpg'},
-{id:'nutrichunks', name:'Nutri Chunks', pet:'dogs', category:'Food', price:170, description:'Complete dog food in different varieties.', image_url:'images/nutrichunks.jpg'},
-{id:'royalcanin-dogs', name:'Royal Canin (dogs)', pet:'dogs', category:'Food', price:150, description:'Specialized nutrition for different dog breeds and sizes.', image_url:'images/royalcanin-dog.jpg'},
-{id:'whiskas', name:'Whiskas', pet:'cats', category:'Food', price:520, description:'Dry and wet food for cats.', image_url:'images/whiskas.jpg'},
-{id:'friskies', name:'Friskies', pet:'cats', category:'Food', price:420, description:'Cat food with different flavors.', image_url:'images/friskies.jpg'},
-{id:'me-o', name:'Me-O', pet:'cats', category:'Food', price:360, description:'Dry and wet cat food.', image_url:'images/meo.jpg'},
-{id:'royalcanin-cats', name:'Royal Canin (cats)', pet:'cats', category:'Food', price:380, description:'Specialized food for different cat breeds and life stages.', image_url:'images/royalcanin-cat.jpg'},
-{id:'sheba', name:'Sheba', pet:'cats', category:'Food', price:300, description:'Premium wet cat food.', image_url:'images/sheba.jpg'}
-];
-
-const STATUS_LABEL = {pending:'Received', confirmed:'Confirmed', ready:'Ready for pickup / out for delivery', completed:'Completed', cancelled:'Cancelled'};
-const PAY_LABEL = {awaiting_verification:'Payment being checked', paid:'Paid', unpaid:'Not paid'};
+const SHOP_WA = '639566949339';          // WhatsApp number in international format (Philippines = 63)
+const ADMIN_PASSWORD = 'change-this-password'; // change this before you share the link with staff
+const STAGES = [['received','Received'],['confirmed','Confirmed'],['ready','Ready'],['completed','Completed']];
+const STAGE_TEXT = {
+  received: 'We got your order. We will text you to confirm the price and the pickup or delivery time.',
+  confirmed: 'Your price and time are confirmed. Please wait for our message.',
+  ready: 'Your order is ready for pickup, or on its way for delivery.',
+  completed: 'Thank you for shopping with us!'
+};
 
 /* ===== Helpers ===== */
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = (p) => p == null ? 'Ask in store' : '₱' + Number(p).toFixed(2);
 const dateText = (iso) => iso ? new Date(iso).toLocaleString('en-PH', {dateStyle:'medium', timeStyle:'short'}) : '';
-const itemsText = (items) => (items || []).map((i) => i.qty + ' x ' + i.name).join(', ');
-
-function normalize(row) {
-  const b = BUILTIN.find((x) => x.name.toLowerCase() === String(row.name || '').trim().toLowerCase()) || {};
-  return {
-    id: String(row.id != null ? row.id : b.id),
-    name: row.name || b.name || 'Product',
-    description: row.description != null ? row.description : (b.description || ''),
-    pet: row.pet || b.pet || 'dogs',
-    category: row.category || b.category || 'Food',
-    price: row.price != null ? Number(row.price) : (b.price != null ? Number(b.price) : null),
-    stock: row.stock != null ? Number(row.stock) : null,
-    image_url: row.image_url || b.image_url || '',
-    is_active: row.is_active !== false
-  };
-}
-
-let sb = null;
-try { sb = window.supabase.createClient(SB_URL, SB_KEY); } catch (e) { sb = null; }
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } }
+};
+const allProducts = () => (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []);
+const shopProducts = () => allProducts().filter((p) => p.active !== false);
+const findProduct = (id) => allProducts().find((p) => p.id === String(id));
+const reviewsFor = (id) => (typeof REVIEWS !== 'undefined' && REVIEWS[id]) || [];
+const avgRating = (list) => list.length ? list.reduce((n, r) => n + Number(r.rating), 0) / list.length : 0;
+const stepper = (status) => {
+  const idx = Math.max(0, STAGES.findIndex((s) => s[0] === status));
+  return '<div class="steps">' + STAGES.map((s, i) => '<span class="step ' + (i <= idx ? 'on' : '') + '">' + s[1] + '</span>').join('') + '</div>' +
+    '<p class="muted">' + esc(STAGE_TEXT[status] || STAGE_TEXT.received) + '</p>';
+};
+const waLink = (text) => 'https://wa.me/' + SHOP_WA + '?text=' + encodeURIComponent(text);
 
 /* ===== State ===== */
 const S = {
-  cart: {}, user: null, pending: null,
-  auth: 'signup', authErr: '',
-  filter: 'all', cat: 'all', q: '',
-  mode: 'pickup', draft: {address:'', notes:'', payRef:''}, checkErr: '', cartErr: '', placed: null,
-  products: BUILTIN.map(normalize),
-  orders: [],
-  admin: {loaded: false, loading: false, tab: 'products', editId: null, products: [], orders: [], customers: [], msg: ''}
+  cart: store.get('ww_cart', {}), customer: store.get('ww_customer', null), pending: null,
+  filter: 'all', cat: 'all', sort: 'default', q: '',
+  mode: 'pickup', draft: {address: '', notes: ''}, checkErr: '', cartErr: '', lastOrder: null,
+  authMode: 'signup', authErr: '', reviewPid: null
 };
-try { S.cart = JSON.parse(localStorage.getItem('ww_cart') || '{}') || {}; } catch (e) { S.cart = {}; }
-function saveCart() { try { localStorage.setItem('ww_cart', JSON.stringify(S.cart)); } catch (e) {} }
-
-const findProduct = (id) => S.products.find((p) => p.id === String(id)) || S.admin.products.find((p) => p.id === String(id));
+const saveCart = () => store.set('ww_cart', S.cart);
 const cartCount = () => Object.keys(S.cart).reduce((n, k) => n + S.cart[k], 0);
 function cartTotal() {
   let total = 0, unpriced = false;
@@ -350,71 +342,19 @@ function cartTotal() {
   return {total, unpriced};
 }
 
-/* ===== Data ===== */
-async function loadProducts() {
-  if (!sb) return;
-  try {
-    const { data, error } = await sb.from('products').select('*');
-    if (!error && Array.isArray(data)) S.products = data.map(normalize).filter((p) => p.is_active);
-  } catch (e) {}
-}
-async function loadMyOrders() {
-  S.orders = [];
-  if (!sb || !S.user) return;
-  try {
-    const { data, error } = await sb.from('orders').select('*').eq('user_id', S.user.id).order('created_at', {ascending: false});
-    if (!error && data) S.orders = data;
-  } catch (e) {}
-}
-async function loadAdmin() {
-  if (!sb || !S.user || !S.user.isAdmin) return;
-  S.admin.loading = true;
-  try {
-    const [p, o, c] = await Promise.all([
-      sb.from('products').select('*').order('name'),
-      sb.from('orders').select('*').order('created_at', {ascending: false}),
-      sb.from('profiles').select('*').order('created_at', {ascending: false})
-    ]);
-    S.admin.products = (p.data || []).map(normalize);
-    S.admin.orders = o.data || [];
-    S.admin.customers = c.data || [];
-  } catch (e) {}
-  S.admin.loaded = true;
-  S.admin.loading = false;
-}
-
-/* ===== Accounts (Supabase Auth) ===== */
-async function setUser(session) {
-  if (!session || !session.user) {
-    S.user = null; S.orders = []; S.admin.loaded = false; return;
-  }
-  const u = session.user;
-  let profile = null;
-  try { const r = await sb.from('profiles').select('*').eq('id', u.id).maybeSingle(); profile = r.data; } catch (e) {}
-  const meta = u.user_metadata || {};
-  S.user = {
-    id: u.id,
-    email: u.email || '',
-    name: (profile && profile.name) || meta.name || u.email || 'Customer',
-    phone: (profile && profile.phone) || meta.phone || '',
-    isAdmin: !!(profile && profile.is_admin)
-  };
-  if (S.pending) { S.cart[S.pending] = (S.cart[S.pending] || 0) + 1; saveCart(); S.pending = null; }
-  await loadMyOrders();
-}
-if (sb) {
-  sb.auth.onAuthStateChange((_event, session) => {
-    // deferred so Supabase calls are not made inside its own auth callback
-    setTimeout(async () => { await setUser(session); renderAll(); }, 0);
-  });
+/* ===== Accounts (saved in this browser) ===== */
+const accounts = () => store.get('ww_accounts', {});
+async function hashPw(salt, pw) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(salt + ':' + pw));
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 function openAuth(mode) {
   $('auth').hidden = false;
   setAuthMode(mode);
-  setTimeout(() => $('aEmail').focus(), 0);
+  setTimeout(() => $('aUser').focus(), 0);
 }
 function setAuthMode(mode) {
-  S.auth = mode;
+  S.authMode = mode;
   $('signupOnly').hidden = mode !== 'signup';
   $('authGo').textContent = mode === 'signup' ? 'Create account' : 'Log in';
   $('tabSignup').className = 'pill' + (mode === 'signup' ? ' on' : '');
@@ -425,214 +365,153 @@ function setAuthErr(t) { $('aErr').textContent = t; }
 function closeOverlays() { $('auth').hidden = true; $('prodModal').hidden = true; setAuthErr(''); }
 
 async function submitAuth() {
-  const email = $('aEmail').value.trim();
+  const mode = S.authMode;
+  const user = $('aUser').value.trim().toLowerCase();
   const pass = $('aPass').value;
-  const name = $('aName').value.trim();
-  const phone = $('aPhone').value.trim();
+  const name = $('aName').value.trim(), phone = $('aPhone').value.trim(), email = $('aEmail').value.trim();
   let err = '';
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) err = 'Please enter a valid email address.';
+  if (!/^[a-z0-9_.-]{3,20}$/.test(user)) err = 'Username must be 3 to 20 letters, numbers, dots, dashes or underscores.';
   else if (pass.length < 6) err = 'Password must be at least 6 characters.';
-  else if (S.auth === 'signup' && !name) err = 'Please enter your name.';
-  else if (S.auth === 'signup' && !/^[0-9+()\s-]{7,}$/.test(phone)) err = 'Please enter a valid phone number.';
+  else if (mode === 'signup' && !name) err = 'Please enter your name.';
+  else if (mode === 'signup' && !/^[0-9+()\s-]{7,}$/.test(phone)) err = 'Please enter a valid phone number.';
+  else if (mode === 'signup' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) err = 'Please enter a valid email address.';
   if (err) return setAuthErr(err);
-  if (!sb) return setAuthErr('Accounts are not available right now. Please try again later.');
-  setAuthErr('Please wait...');
   try {
-    if (S.auth === 'signup') {
-      const { data, error } = await sb.auth.signUp({ email, password: pass, options: { data: { name, phone } } });
-      if (error) return setAuthErr(error.message);
-      if (data.session) { closeOverlays(); return; }
-      setAuthErr('Account created. Check your email to confirm it, then log in.');
-      setAuthMode('login');
-      setAuthErr('Account created. Check your email to confirm it, then log in.');
+    const acc = accounts();
+    let rec;
+    if (mode === 'signup') {
+      if (acc[user]) return setAuthErr('That username is taken. Try another, or log in.');
+      const salt = Array.from(crypto.getRandomValues(new Uint8Array(16))).map((b) => b.toString(16).padStart(2, '0')).join('');
+      rec = {salt: salt, hash: await hashPw(salt, pass), name: name, phone: phone, email: email};
+      acc[user] = rec;
+      if (!store.set('ww_accounts', acc)) return setAuthErr('Could not save your account in this browser.');
     } else {
-      const { error } = await sb.auth.signInWithPassword({ email, password: pass });
-      if (error) return setAuthErr(error.message === 'Invalid login credentials' ? 'Wrong email or password.' : error.message);
-      closeOverlays();
+      rec = acc[user];
+      if (!rec || (await hashPw(rec.salt, pass)) !== rec.hash) return setAuthErr('Wrong username or password.');
     }
+    S.customer = {username: user, name: rec.name, phone: rec.phone, email: rec.email};
+    store.set('ww_customer', S.customer);
+    if (S.pending) { S.cart[S.pending] = (S.cart[S.pending] || 0) + 1; saveCart(); S.pending = null; }
     $('aPass').value = '';
+    closeOverlays();
+    renderAll();
   } catch (e) {
     setAuthErr('Something went wrong. Please try again.');
   }
 }
-async function logout() {
-  try { if (sb) await sb.auth.signOut(); } catch (e) {}
-  S.user = null; S.orders = []; S.placed = null; S.pending = null; S.admin.loaded = false;
+function logout() {
+  S.customer = null; S.lastOrder = null; S.pending = null;
+  store.set('ww_customer', null);
   renderAll();
 }
 
-/* ===== Cart ===== */
+/* ===== Cart and orders ===== */
 function addToCart(id) {
-  if (!S.user) { S.pending = String(id); openAuth('signup'); return; }
-  const p = findProduct(id);
-  if (!p) return;
-  const cur = S.cart[id] || 0;
-  if (p.stock != null && cur + 1 > p.stock) { S.cartErr = 'Sorry, only ' + p.stock + ' left of ' + p.name + '.'; return renderAll(); }
-  S.cart[id] = cur + 1; S.cartErr = ''; saveCart(); renderAll();
+  if (!S.customer) { S.pending = String(id); openAuth('signup'); return; }
+  S.cart[id] = (S.cart[id] || 0) + 1;
+  S.cartErr = ''; saveCart(); renderAll();
 }
 function changeQty(id, d) {
   const cur = (S.cart[id] || 0) + d;
-  if (cur <= 0) delete S.cart[id];
-  else {
-    const p = findProduct(id);
-    if (p && p.stock != null && cur > p.stock) { S.cartErr = 'Sorry, only ' + p.stock + ' left of ' + p.name + '.'; return renderAll(); }
-    S.cart[id] = cur;
-  }
-  S.cartErr = ''; saveCart(); renderAll();
+  if (cur <= 0) delete S.cart[id]; else S.cart[id] = cur;
+  saveCart(); renderAll();
 }
-
-async function placeOrder() {
-  if (!S.user) return openAuth('signup');
+function placeOrder() {
+  if (!S.customer) return openAuth('signup');
   if (!Object.keys(S.cart).length) { S.checkErr = 'Your cart is empty.'; return renderAll(); }
   const address = S.draft.address.trim();
-  const notes = S.draft.notes.trim();
   if (S.mode === 'delivery' && !address) { S.checkErr = 'Please enter a delivery address.'; return renderAll(); }
-  if (!sb) { S.checkErr = 'Orders are not available right now.'; return renderAll(); }
-  const items = Object.keys(S.cart).map((id) => {
-    const p = findProduct(id);
-    return {id: id, name: p ? p.name : id, qty: S.cart[id], price: p && p.price != null ? p.price : null};
-  });
   const t = cartTotal();
-  const row = {
-    user_id: S.user.id, customer_name: S.user.name, phone: S.user.phone, email: S.user.email,
-    mode: S.mode, address: S.mode === 'delivery' ? address : null, notes: notes || null,
-    items: items, total: t.total, payment_method: 'cash', payment_ref: null,
-    payment_status: 'unpaid', status: 'pending'
+  const order = {
+    id: Date.now().toString(36).toUpperCase(),
+    date: new Date().toISOString(),
+    username: S.customer.username,
+    name: S.customer.name, phone: S.customer.phone,
+    mode: S.mode, address: S.mode === 'delivery' ? address : '', notes: S.draft.notes.trim(),
+    items: Object.keys(S.cart).map((id) => {
+      const p = findProduct(id);
+      return {id: id, name: p ? p.name : id, qty: S.cart[id], price: p && p.price != null ? p.price : null};
+    }),
+    total: t.total, unpriced: t.unpriced, status: 'received'
   };
-  // leave out empty fields so the database never sees columns a pickup order does not need
-  Object.keys(row).forEach((k) => { if (row[k] === null || row[k] === '') delete row[k]; });
-  try {
-    const { error } = await sb.from('orders').insert(row);
-    if (error) { S.checkErr = 'Could not place the order: ' + error.message; return renderAll(); }
-  } catch (e) {
-    S.checkErr = 'Could not place the order. Please try again.'; return renderAll();
-  }
+  const list = store.get('ww_orders', []);
+  list.unshift(order);
+  store.set('ww_orders', list);
   S.cart = {}; saveCart();
-  S.placed = {total: t.total, unpriced: t.unpriced};
-  S.checkErr = ''; S.draft = {address:'', notes:'', payRef:''};
-  await loadMyOrders();
+  S.lastOrder = order;
+  S.checkErr = ''; S.draft = {address: '', notes: ''};
   renderAll();
+}
+function orderText(o) {
+  const lines = o.items.map((i) => i.price != null ? i.qty + ' x ' + i.name + ' = ' + money(i.price * i.qty) : i.qty + ' x ' + i.name);
+  return ['Wag & Whisker order #' + o.id].concat(lines, [
+    'Total: ' + money(o.total) + (o.unpriced ? ' (some prices to be confirmed)' : ''),
+    o.mode === 'delivery' ? 'Delivery to: ' + o.address : 'Pickup at STI Novaliches',
+    'Name: ' + o.name, 'Phone: ' + o.phone,
+    o.notes ? 'Notes: ' + o.notes : ''
+  ]).filter(Boolean).join('\n');
 }
 
 /* ===== Reviews ===== */
-async function openReviews(id) {
+function openReviews(id) {
   const p = findProduct(id);
   if (!p) return;
+  const list = reviewsFor(p.id);
+  const avg = avgRating(list);
+  const listHtml = list.length ? list.map((r) =>
+    '<div class="row" style="flex-direction:column;align-items:flex-start"><span class="stars">' + '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) + '</span>' +
+    '<b>' + esc(r.name || 'Customer') + '</b><p>' + esc(r.text) + '</p>' + (r.date ? '<small class="muted">' + esc(r.date) + '</small>' : '') + '</div>'
+  ).join('') : '<p>No reviews yet. Be the first to share your experience.</p>';
   $('prodModal').hidden = false;
-  $('prodBody').innerHTML = '<div class="tabs"><h2 style="font-size:22px;margin:0">' + esc(p.name) + '</h2><button class="x" data-close="1" aria-label="Close">&times;</button></div><p class="muted">Loading reviews...</p>';
-  let reviews = [];
-  try {
-    if (sb) {
-      const r = await sb.from('reviews').select('*').eq('product_id', String(p.id)).order('created_at', {ascending: false});
-      reviews = r.data || [];
-    }
-  } catch (e) {}
-  const avg = reviews.length ? reviews.reduce((n, r) => n + r.rating, 0) / reviews.length : 0;
-  const mine = S.user && reviews.some((r) => r.user_id === S.user.id);
-  const list = reviews.length ? reviews.map((r) =>
-    '<div class="row" style="flex-direction:column;align-items:flex-start"><span class="stars">' + '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating) + '</span><b>' + esc(r.name || 'Customer') + '</b><p>' + esc(r.body) + '</p><small class="muted">' + dateText(r.created_at) + '</small></div>'
-  ).join('') : '<p>No reviews yet.</p>';
-  let form;
-  if (!S.user) form = '<p class="muted">Log in to write a review.</p>';
-  else if (mine) form = '<p class="muted">You already reviewed this product. Thank you!</p>';
-  else form = '<label>Rating<select id="rvRating"><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Bad</option></select></label>' +
-    '<label>Your review<textarea id="rvBody"></textarea></label><p class="err" id="rvErr"></p>' +
-    '<button class="solid" data-act="submitReview" data-pid="' + esc(p.id) + '">Post review</button>';
   $('prodBody').innerHTML = '<div class="tabs"><h2 style="font-size:22px;margin:0">' + esc(p.name) + '</h2><button class="x" data-close="1" aria-label="Close">&times;</button></div>' +
-    '<p>' + (reviews.length ? '<span class="stars">' + avg.toFixed(1) + ' ★</span> from ' + reviews.length + ' review(s)' : 'No ratings yet') + '</p>' +
-    list + '<div style="display:flex;flex-direction:column;gap:12px">' + form + '</div>';
-}
-async function submitReview(pid) {
-  const body = $('rvBody').value.trim();
-  if (!body) { $('rvErr').textContent = 'Please write a short review.'; return; }
-  const rating = Number($('rvRating').value);
-  try {
-    const { error } = await sb.from('reviews').insert({ product_id: String(pid), user_id: S.user.id, name: S.user.name, rating: rating, body: body });
-    if (error) { $('rvErr').textContent = error.code === '23505' ? 'You already reviewed this product.' : 'Could not save your review.'; return; }
-  } catch (e) { $('rvErr').textContent = 'Could not save your review.'; return; }
-  openReviews(pid);
-}
-
-/* ===== Admin actions ===== */
-async function saveProduct() {
-  const name = $('pName').value.trim();
-  if (!name) { S.admin.msg = 'Please enter a product name.'; return renderAll(); }
-  const priceRaw = $('pPrice').value, stockRaw = $('pStock').value;
-  const payload = {
-    name: name,
-    description: $('pDesc').value.trim(),
-    pet: $('pPet').value,
-    category: $('pCat').value.trim() || 'Food',
-    price: priceRaw === '' ? null : Number(priceRaw),
-    stock: stockRaw === '' ? null : Math.max(0, parseInt(stockRaw, 10)),
-    image_url: $('pImg').value.trim() || null,
-    is_active: $('pActive').checked
-  };
-  try {
-    const q = S.admin.editId
-      ? sb.from('products').update(payload).eq('id', S.admin.editId)
-      : sb.from('products').insert(payload);
-    const { error } = await q;
-    if (error) { S.admin.msg = error.message; return renderAll(); }
-  } catch (e) { S.admin.msg = 'Could not save the product.'; return renderAll(); }
-  S.admin.msg = S.admin.editId ? 'Product updated.' : 'Product added.';
-  S.admin.editId = null;
-  await loadProducts(); await loadAdmin(); renderAll();
-}
-async function deleteProduct() {
-  if (!S.admin.editId || !confirm('Delete this product? Customers will no longer see it.')) return;
-  try {
-    const { error } = await sb.from('products').delete().eq('id', S.admin.editId);
-    if (error) { S.admin.msg = error.message; return renderAll(); }
-  } catch (e) { S.admin.msg = 'Could not delete the product.'; return renderAll(); }
-  S.admin.editId = null; S.admin.msg = 'Product deleted.';
-  await loadProducts(); await loadAdmin(); renderAll();
-}
-async function saveOrder(id) {
-  const status = $('os-' + id).value, payment_status = $('ps-' + id).value;
-  try {
-    const { error } = await sb.from('orders').update({status: status, payment_status: payment_status}).eq('id', id);
-    S.admin.msg = error ? error.message : 'Order updated.';
-  } catch (e) { S.admin.msg = 'Could not update the order.'; }
-  await loadAdmin(); renderAll();
+    '<p>' + (list.length ? '<span class="stars">' + avg.toFixed(1) + ' ★</span> from ' + list.length + ' review(s)' : 'No ratings yet') + '</p>' +
+    '<div class="stack">' + listHtml + '</div>' +
+    '<div class="stack" style="margin-top:8px"><h3>Write a review</h3>' +
+    '<label>Your name<input id="rvName" value="' + esc(S.customer ? S.customer.name : '') + '"></label>' +
+    '<label>Rating<select id="rvStars"><option value="5">5 - Excellent</option><option value="4">4 - Good</option><option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Bad</option></select></label>' +
+    '<label>Your review<textarea id="rvText"></textarea></label>' +
+    '<p class="muted">Reviews are sent to the shop first and shown after we check them.</p>' +
+    '<button class="solid" data-act="sendReview" data-pid="' + esc(p.id) + '">Send review to the shop</button></div>';
 }
 
 /* ===== Rendering ===== */
 function renderAll() {
-  const adminMode = location.hash === '#admin' && S.user && S.user.isAdmin;
-  document.body.classList.toggle('admin-mode', !!adminMode);
+  const adminMode = location.hash === '#admin';
+  document.body.classList.toggle('admin-mode', adminMode);
   renderHeader(); renderFilters(); renderGrid(); renderCart(); renderTrack(); renderAdmin();
 }
 function renderHeader() {
   $('cartCount').textContent = cartCount();
-  $('adminLink').hidden = !(S.user && S.user.isAdmin);
-  $('trackLink').hidden = !S.user;
-  $('acct').innerHTML = S.user
-    ? '<span>Hi, ' + esc(S.user.name.split(' ')[0]) + '</span><button data-act="logout" class="ghost">Log out</button>'
+  $('trackLink').hidden = !S.customer;
+  $('acct').innerHTML = S.customer
+    ? '<span>Hi, ' + esc(S.customer.name.split(' ')[0]) + '</span><button data-act="logout" class="ghost">Log out</button>'
     : '<button data-act="login" class="ghost">Log in</button><button data-act="signup">Sign up</button>';
 }
 function renderFilters() {
   const pets = [['all', 'All'], ['dogs', 'Dogs'], ['cats', 'Cats']];
-  const cats = [...new Set(S.products.map((p) => p.category).filter(Boolean))].sort();
+  const cats = [...new Set(shopProducts().map((p) => p.category).filter(Boolean))].sort();
   $('filters').innerHTML = pets.map(([k, l]) => '<button class="pill ' + (S.filter === k ? 'on' : '') + '" data-filter="' + k + '">' + l + '</button>').join('') +
     cats.map((c) => '<button class="pill ' + (S.cat === c ? 'on' : '') + '" data-cat="' + esc(c) + '">' + esc(c) + '</button>').join('');
+  $('sort').value = S.sort;
 }
 function renderGrid() {
   const q = S.q.trim().toLowerCase();
-  const list = S.products.filter((p) =>
+  let list = shopProducts().filter((p) =>
     (S.filter === 'all' || p.pet === S.filter) &&
     (S.cat === 'all' || p.category === S.cat) &&
     (!q || p.name.toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q)));
+  if (S.sort === 'name') list = list.slice().sort((a, b) => a.name.localeCompare(b.name));
+  if (S.sort === 'asc') list = list.slice().sort((a, b) => (a.price == null) - (b.price == null) || (a.price || 0) - (b.price || 0));
+  if (S.sort === 'desc') list = list.slice().sort((a, b) => (a.price == null) - (b.price == null) || (b.price || 0) - (a.price || 0));
   $('grid').innerHTML = list.length ? list.map((p) => {
     const n = S.cart[p.id] || 0;
-    const out = p.stock != null && p.stock <= 0;
-    const stockBadge = out ? '<span class="badge warn">Out of stock</span>'
-      : (p.stock != null && p.stock <= LOW_STOCK ? '<span class="badge">Only ' + p.stock + ' left</span>' : '');
-    return '<article class="card-p"><div class="img">' + (p.image_url ? '<img src="' + esc(p.image_url) + '" alt="' + esc(p.name) + '" loading="lazy">' : '') + '</div>' +
+    const rv = reviewsFor(p.id);
+    return '<article class="card-p"><div class="img">' + (p.image ? '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy">' : '') + '</div>' +
       '<div class="body"><span class="tag">' + (p.pet === 'cats' ? 'Cat' : 'Dog') + ' · ' + esc(p.category) + '</span>' +
       '<h3>' + esc(p.name) + '</h3><p class="note">' + esc(p.description) + '</p>' +
-      '<p class="price">' + money(p.price) + '</p>' + stockBadge +
-      '<button class="solid small" data-add="' + esc(p.id) + '"' + (out ? ' disabled' : '') + '>Add to cart</button>' +
+      '<p class="price">' + money(p.price) + '</p>' +
+      (rv.length ? '<span class="stars">' + avgRating(rv).toFixed(1) + ' ★ (' + rv.length + ')</span>' : '') +
+      '<button class="solid small" data-add="' + esc(p.id) + '">Add to cart</button>' +
       '<button class="small" data-reviews="' + esc(p.id) + '">Reviews</button>' +
       (n ? '<span class="inc">In your order: ' + n + '</span>' : '') + '</div></article>';
   }).join('') : '<p>No products match your search.</p>';
@@ -653,23 +532,29 @@ function renderCart() {
 }
 function renderCheckout() {
   const box = $('checkout');
-  if (!S.user) {
+  if (!S.customer) {
     box.innerHTML = '<h2>Log in or sign up</h2>' +
-      '<p>Create an account or log in to place your order.</p>' +
+      '<p>Create an account or log in to add items and place your order.</p>' +
       (S.pending ? '<p class="strong">Sign up or log in to add ' + esc((findProduct(S.pending) || {}).name || 'this product') + ' to your order.</p>' : '') +
       '<div class="pills"><button class="solid" data-act="signup">Sign up</button><button data-act="login">Log in</button></div>';
     return;
   }
-  if (S.placed) {
-    box.innerHTML = '<h2>Order received</h2>' +
-      '<p>Thank you! We will confirm your order and the price. You can follow the status under My orders.</p>' +
-      '<p class="strong">Total: ' + money(S.placed.total) + (S.placed.unpriced ? ' (some prices to be confirmed)' : '') + '</p>' +
-      '<div class="pills"><button data-act="newOrder">Start a new order</button></div>';
+  if (S.lastOrder) {
+    const o = S.lastOrder;
+    const text = orderText(o);
+    box.innerHTML = '<h2>Order received</h2>' + stepper(o.status) +
+      '<pre>' + esc(text) + '</pre>' +
+      '<p class="muted">Send this order to the shop so we can confirm it.</p>' +
+      '<div class="pills">' +
+      '<a class="btn solid" href="' + esc(waLink(text)) + '" target="_blank" rel="noopener">Send on WhatsApp</a>' +
+      '<a class="btn" href="sms:' + esc(SHOP_PHONE.replace(/\s/g, '')) + '?body=' + encodeURIComponent(text) + '">Text the shop</a>' +
+      '<button data-act="copyOrder">Copy order</button>' +
+      '<button data-act="newOrder">Start a new order</button></div>';
     return;
   }
   const t = cartTotal();
   box.innerHTML = '<h2>Checkout</h2>' +
-    '<div class="row"><span><b>' + esc(S.user.name) + '</b><br><small class="muted">' + esc(S.user.phone) + ' · ' + esc(S.user.email) + '</small></span>' +
+    '<div class="row"><span><b>' + esc(S.customer.name) + '</b><br><small class="muted">' + esc(S.customer.phone) + ' · ' + esc(S.customer.email) + '</small></span>' +
     '<button class="ghost small" data-act="logout">Log out</button></div>' +
     '<div class="pills">' + ['pickup', 'delivery'].map((m) => '<button class="pill ' + (S.mode === m ? 'on' : '') + '" data-mode="' + m + '">' + (m === 'pickup' ? 'Pickup' : 'Delivery') + '</button>').join('') + '</div>' +
     (S.mode === 'delivery' ? '<label>Delivery address<input id="address" value="' + esc(S.draft.address) + '"></label>' : '') +
@@ -679,110 +564,115 @@ function renderCheckout() {
     '<button class="solid" data-act="placeOrder"' + (Object.keys(S.cart).length ? '' : ' disabled') + '>Place order</button>';
 }
 function renderTrack() {
-  $('track').hidden = !S.user;
-  if (!S.user) return;
-  $('myOrders').innerHTML = S.orders.length ? S.orders.map((o) =>
-    '<div class="row"><span><b>' + dateText(o.created_at) + '</b><br><small class="muted">' + esc(itemsText(o.items)) + ' · ' + money(o.total) + '</small></span>' +
-    '<span><span class="badge">' + esc(STATUS_LABEL[o.status] || o.status) + '</span> ' +
-    '<span class="badge ' + (o.payment_status === 'paid' ? 'ok' : '') + '">' + esc(PAY_LABEL[o.payment_status] || o.payment_status) + '</span></span></div>'
+  $('track').hidden = !S.customer;
+  if (!S.customer) return;
+  const mine = store.get('ww_orders', []).filter((o) => o.username === S.customer.username);
+  $('myOrders').innerHTML = mine.length ? mine.map((o) =>
+    '<div class="row" style="flex-direction:column;align-items:flex-start"><b>Order #' + esc(o.id) + ' · ' + dateText(o.date) + '</b>' +
+    '<small class="muted">' + esc(o.items.map((i) => i.qty + ' x ' + i.name).join(', ')) + ' · ' + money(o.total) + '</small>' +
+    stepper(o.status) + '</div>'
   ).join('') : '<p>No orders yet.</p>';
 }
 
-/* ----- Admin dashboard ----- */
+/* ----- Shop staff page (#admin) ----- */
+const A = {
+  unlocked: sessionStorage.getItem('ww_admin') === '1',
+  draft: null,
+  msg: ''
+};
+function adminDraft() {
+  if (!A.draft) {
+    A.draft = store.get('ww_admin_draft', null) || {
+      products: JSON.parse(JSON.stringify(allProducts())),
+      reviews: JSON.parse(JSON.stringify(typeof REVIEWS !== 'undefined' ? REVIEWS : {}))
+    };
+  }
+  return A.draft;
+}
+function collectDraft() {
+  // read the product fields currently on the screen into the draft
+  const d = adminDraft();
+  d.products.forEach((p, i) => {
+    const get = (f) => document.querySelector('[data-f="' + f + '"][data-i="' + i + '"]');
+    if (!get('name')) return;
+    p.name = get('name').value.trim();
+    p.description = get('description').value.trim();
+    p.pet = get('pet').value;
+    p.category = get('category').value.trim() || 'Food';
+    p.price = get('price').value === '' ? null : Number(get('price').value);
+    p.image = get('image').value.trim();
+    p.active = get('active').checked;
+  });
+  return d;
+}
+function saveDraft() {
+  collectDraft();
+  A.msg = store.set('ww_admin_draft', A.draft) ? 'Saved on this device. Download products.js to put the changes on the website.' : 'Could not save.';
+  renderAll();
+}
+function downloadProducts() {
+  const d = collectDraft();
+  store.set('ww_admin_draft', d);
+  const code = '/* Wag & Whisker: product list and approved reviews.\n   Upload this file to GitHub next to index.html. */\n' +
+    'var PRODUCTS = ' + JSON.stringify(d.products, null, 2) + ';\n\n' +
+    'var REVIEWS = ' + JSON.stringify(d.reviews, null, 2) + ';\n';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([code], {type: 'text/javascript'}));
+  a.download = 'products.js';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  A.msg = 'products.js downloaded. Upload it to GitHub to update the website.';
+  renderAll();
+}
 function renderAdmin() {
   const view = $('adminView');
   const show = document.body.classList.contains('admin-mode');
   view.hidden = !show;
   if (!show) return;
-  if (!S.admin.loaded) {
-    view.innerHTML = '<p>Loading dashboard...</p>';
-    if (!S.admin.loading) loadAdmin().then(renderAll);
+  if (!A.unlocked) {
+    view.innerHTML = '<div class="panel plain" style="max-width:420px;margin:0 auto"><h2>Shop staff</h2>' +
+      '<label>Password<input id="admPass" type="password"></label>' +
+      '<p class="err" id="admErr"></p><button class="solid" data-act="adminLogin">Open dashboard</button></div>';
     return;
   }
-  const a = S.admin;
-  const tabs = [['products', 'Products'], ['orders', 'Orders'], ['customers', 'Customers'], ['sales', 'Sales']];
-  const tabBar = '<div class="tabs-a">' + tabs.map(([k, l]) => '<button class="pill ' + (a.tab === k ? 'on' : '') + '" data-atab="' + k + '">' + l + '</button>').join('') +
-    '<button class="small" data-act="refreshAdmin">Refresh</button></div>';
-  const body = a.tab === 'products' ? adminProducts() : a.tab === 'orders' ? adminOrders() : a.tab === 'customers' ? adminCustomers() : adminSales();
-  view.innerHTML = '<h2>Admin dashboard</h2>' + (a.msg ? '<p class="msg">' + esc(a.msg) + '</p>' : '') + tabBar + body;
-}
-function adminProducts() {
-  const a = S.admin;
-  const cur = a.editId ? a.products.find((p) => p.id === String(a.editId)) : null;
-  const cats = [...new Set(a.products.map((p) => p.category).filter(Boolean))].sort();
-  const v = (x) => esc(x == null ? '' : x);
-  const rows = a.products.map((p) => {
-    const low = p.stock != null && p.stock <= LOW_STOCK;
-    return '<tr class="' + (low ? 'low' : '') + '"><td>' + esc(p.name) + '</td><td>' + (p.pet === 'cats' ? 'Cat' : 'Dog') + '</td><td>' + esc(p.category) +
-      '</td><td>' + money(p.price) + '</td><td>' + (p.stock == null ? 'Unlimited' : p.stock) + (low ? ' <span class="badge warn">Low</span>' : '') +
-      '</td><td>' + (p.is_active ? 'Yes' : 'No') + '</td><td><button class="small" data-edit="' + esc(p.id) + '">Edit</button></td></tr>';
-  }).join('');
-  return '<div class="admin-grid"><div class="table-wrap"><table><thead><tr><th>Name</th><th>Pet</th><th>Category</th><th>Price</th><th>Stock</th><th>Shown</th><th></th></tr></thead><tbody>' +
-    (rows || '<tr><td colspan="7">No products yet.</td></tr>') + '</tbody></table></div>' +
-    '<div class="panel plain"><h3>' + (cur ? 'Edit product' : 'New product') + '</h3>' +
-    '<label>Name<input id="pName" value="' + v(cur && cur.name) + '"></label>' +
-    '<label>Description<textarea id="pDesc">' + v(cur && cur.description) + '</textarea></label>' +
-    '<label>Pet<select id="pPet"><option value="dogs"' + (!cur || cur.pet !== 'cats' ? ' selected' : '') + '>Dogs</option><option value="cats"' + (cur && cur.pet === 'cats' ? ' selected' : '') + '>Cats</option></select></label>' +
-    '<label>Category<input id="pCat" list="catList" value="' + v(cur && cur.category) + '"><datalist id="catList">' + cats.map((c) => '<option value="' + esc(c) + '">').join('') + '</datalist></label>' +
-    '<label>Price (₱, empty = ask in store)<input id="pPrice" type="number" min="0" step="0.01" value="' + v(cur && cur.price) + '"></label>' +
-    '<label>Stock (empty = unlimited)<input id="pStock" type="number" min="0" step="1" value="' + v(cur && cur.stock) + '"></label>' +
-    '<label>Photo (e.g. images/pedigree.jpg or a web link)<input id="pImg" value="' + v(cur && cur.image_url) + '"></label>' +
-    '<label style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" id="pActive" style="width:auto"' + (!cur || cur.is_active ? ' checked' : '') + '> Show in shop</label>' +
-    '<div class="pills"><button class="solid" data-act="saveProduct">Save</button><button data-act="newProduct">New product</button>' +
-    (cur ? '<button class="link" data-act="deleteProduct">Delete</button>' : '') + '</div></div></div>';
-}
-function adminOrders() {
-  if (!S.admin.orders.length) return '<p>No orders yet.</p>';
-  const ST = ['pending', 'confirmed', 'ready', 'completed', 'cancelled'];
-  const PS = ['awaiting_verification', 'paid', 'unpaid'];
-  return '<div style="display:grid;gap:12px">' + S.admin.orders.map((o) =>
-    '<div class="order-card"><div class="kv">' +
-    '<b>Date</b><span>' + dateText(o.created_at) + '</span>' +
-    '<b>Customer</b><span>' + esc(o.customer_name) + ' · ' + esc(o.phone) + ' · ' + esc(o.email) + '</span>' +
-    '<b>Pickup</b><span>' + (o.mode === 'delivery' ? 'Delivery: ' + esc(o.address) : 'Pickup at store') + '</span>' +
-    '<b>Items</b><span>' + esc(itemsText(o.items)) + '</span>' +
-    '<b>Total</b><span>' + money(o.total) + '</span>' +
-    '<b>GCash ref</b><span>' + esc(o.payment_ref) + '</span>' +
-    (o.notes ? '<b>Notes</b><span>' + esc(o.notes) + '</span>' : '') + '</div>' +
-    '<div class="pills"><label style="flex:1 1 180px">Order status<select id="os-' + esc(o.id) + '">' +
-    ST.map((s) => '<option value="' + s + '"' + (o.status === s ? ' selected' : '') + '>' + STATUS_LABEL[s] + '</option>').join('') + '</select></label>' +
-    '<label style="flex:1 1 180px">Payment<select id="ps-' + esc(o.id) + '">' +
-    PS.map((s) => '<option value="' + s + '"' + (o.payment_status === s ? ' selected' : '') + '>' + PAY_LABEL[s] + '</option>').join('') + '</select></label>' +
-    '<button class="solid small" data-save-order="' + esc(o.id) + '">Save</button></div></div>'
-  ).join('') + '</div>';
-}
-function adminCustomers() {
-  const counts = {};
-  S.admin.orders.forEach((o) => { if (o.user_id) counts[o.user_id] = (counts[o.user_id] || 0) + 1; });
-  if (!S.admin.customers.length) return '<p>No customers yet.</p>';
-  return '<div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Orders</th><th>Role</th><th>Joined</th></tr></thead><tbody>' +
-    S.admin.customers.map((c) => '<tr><td>' + esc(c.name) + '</td><td>' + esc(c.email) + '</td><td>' + esc(c.phone) + '</td><td>' + (counts[c.id] || 0) +
-      '</td><td>' + (c.is_admin ? 'Admin' : 'Customer') + '</td><td>' + dateText(c.created_at) + '</td></tr>').join('') +
-    '</tbody></table></div>';
-}
-function adminSales() {
-  const sumOf = (arr) => arr.reduce((n, o) => n + Number(o.total || 0), 0);
-  const live = S.admin.orders.filter((o) => o.status !== 'cancelled');
-  const paid = live.filter((o) => o.payment_status === 'paid');
-  const today = new Date().toDateString();
-  const paidToday = paid.filter((o) => new Date(o.created_at).toDateString() === today);
-  const waiting = S.admin.orders.filter((o) => o.payment_status === 'awaiting_verification').length;
-  const byStatus = {};
-  S.admin.orders.forEach((o) => { byStatus[o.status] = (byStatus[o.status] || 0) + 1; });
-  const days = [];
-  for (let i = 6; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); days.push(d); }
-  const dayRows = days.map((d) => {
-    const key = d.toDateString();
-    const dp = paid.filter((o) => new Date(o.created_at).toDateString() === key);
-    return '<tr><td>' + d.toLocaleDateString('en-PH', {month: 'short', day: 'numeric'}) + '</td><td>' + dp.length + '</td><td>' + money(sumOf(dp)) + '</td></tr>';
-  }).join('');
-  return '<div class="two">' +
-    '<div class="panel plain"><b>Revenue (paid orders)</b><span class="stat">' + money(sumOf(paid)) + '</span><span class="muted">' + paid.length + ' paid orders</span></div>' +
-    '<div class="panel plain"><b>Revenue today</b><span class="stat">' + money(sumOf(paidToday)) + '</span><span class="muted">' + paidToday.length + ' paid orders today</span></div>' +
-    '<div class="panel plain"><b>Waiting for payment check</b><span class="stat">' + waiting + '</span><span class="muted">Check GCash references in the Orders tab</span></div>' +
-    '<div class="panel plain"><b>Orders by status</b>' + (Object.keys(byStatus).length ? Object.keys(byStatus).map((k) => '<span>' + esc(STATUS_LABEL[k] || k) + ': <b>' + byStatus[k] + '</b></span>').join('') : '<span class="muted">No orders yet</span>') + '</div>' +
-    '</div><h3 style="margin-top:20px">Last 7 days</h3>' +
-    '<div class="table-wrap"><table><thead><tr><th>Day</th><th>Paid orders</th><th>Revenue</th></tr></thead><tbody>' + dayRows + '</tbody></table></div>';
+  const d = adminDraft();
+  const products = d.products.map((p, i) =>
+    '<div class="adm-card">' +
+    '<label>Name<input data-f="name" data-i="' + i + '" value="' + esc(p.name) + '"></label>' +
+    '<label>Price (₱, empty = ask in store)<input data-f="price" data-i="' + i + '" type="number" min="0" step="0.01" value="' + esc(p.price == null ? '' : p.price) + '"></label>' +
+    '<label>Pet<select data-f="pet" data-i="' + i + '"><option value="dogs"' + (p.pet !== 'cats' ? ' selected' : '') + '>Dogs</option><option value="cats"' + (p.pet === 'cats' ? ' selected' : '') + '>Cats</option></select></label>' +
+    '<label>Category<input data-f="category" data-i="' + i + '" value="' + esc(p.category) + '"></label>' +
+    '<label class="wide">Description<textarea data-f="description" data-i="' + i + '">' + esc(p.description) + '</textarea></label>' +
+    '<label class="wide">Photo path (e.g. images/pedigree.jpg)<input data-f="image" data-i="' + i + '" value="' + esc(p.image) + '"></label>' +
+    '<label style="flex-direction:row;align-items:center;gap:8px"><input type="checkbox" data-f="active" data-i="' + i + '" style="width:auto"' + (p.active !== false ? ' checked' : '') + '> Show in shop</label>' +
+    '<div><button class="link" data-act="removeProduct" data-i="' + i + '">Remove product</button></div></div>'
+  ).join('');
+  const reviewRows = d.products.map((p) => (d.reviews[p.id] || []).map((r, idx) =>
+    '<div class="row"><span><b>' + esc(p.name) + '</b> · ' + '★'.repeat(r.rating) + ' · ' + esc(r.name) + '<br><small>' + esc(r.text) + '</small></span>' +
+    '<button class="link" data-act="removeReview" data-pid="' + esc(p.id) + '" data-idx="' + idx + '">Remove</button></div>'
+  ).join('')).join('');
+  const orders = store.get('ww_orders', []);
+  const orderRows = orders.length ? orders.map((o) =>
+    '<div class="row"><span><b>#' + esc(o.id) + '</b> · ' + dateText(o.date) + '<br><small>' + esc(o.items.map((i) => i.qty + ' x ' + i.name).join(', ')) + ' · ' + money(o.total) + ' · ' + esc(o.name) + ' ' + esc(o.phone) + '</small></span></div>'
+  ).join('') : '<p class="muted">No orders saved on this device yet. Customer orders arrive on WhatsApp.</p>';
+  view.innerHTML = '<h2>Shop staff</h2>' +
+    (A.msg ? '<p class="msg">' + esc(A.msg) + '</p>' : '') +
+    '<div class="adm-tools"><button class="solid" data-act="saveDraft">Save changes</button>' +
+    '<button class="solid" data-act="downloadProducts">Download products.js</button>' +
+    '<button data-act="addProduct">Add product</button>' +
+    '<button class="link" data-act="resetDraft">Reset to the website version</button>' +
+    '<button class="ghost" data-act="adminLock">Lock</button></div>' +
+    '<h3>Products</h3><div class="stack">' + (products || '<p>No products.</p>') + '</div>' +
+    '<h3 style="margin-top:24px">Add a review</h3>' +
+    '<div class="adm-card">' +
+    '<label>Product<select id="rvPid">' + d.products.map((p) => '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>').join('') + '</select></label>' +
+    '<label>Customer name<input id="rvName"></label>' +
+    '<label>Stars<select id="rvStars"><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></label>' +
+    '<label class="wide">Review<textarea id="rvText"></textarea></label>' +
+    '<div class="wide"><button class="solid" data-act="addReview">Add review</button></div></div>' +
+    '<h3 style="margin-top:20px">Reviews on the website</h3><div class="stack">' + (reviewRows || '<p class="muted">No reviews yet.</p>') + '</div>' +
+    '<h3 style="margin-top:24px">Orders saved on this device</h3><div class="stack">' + orderRows + '</div>';
 }
 
 /* ===== Events ===== */
@@ -792,12 +682,66 @@ const actions = {
   logout: () => logout(),
   authGo: () => submitAuth(),
   placeOrder: () => placeOrder(),
-  newOrder: () => { S.placed = null; S.mode = 'pickup'; renderAll(); },
-  saveProduct: () => saveProduct(),
-  newProduct: () => { S.admin.editId = null; S.admin.msg = ''; renderAll(); },
-  deleteProduct: () => deleteProduct(),
-  refreshAdmin: async () => { await loadAdmin(); renderAll(); },
-  submitReview: (b) => submitReview(b.dataset.pid)
+  newOrder: () => { S.lastOrder = null; S.mode = 'pickup'; renderAll(); },
+  copyOrder: () => {
+    if (!S.lastOrder) return;
+    try { navigator.clipboard.writeText(orderText(S.lastOrder)); } catch (e) {}
+    A.msg = '';
+    const b = document.activeElement; if (b) b.textContent = 'Copied';
+  },
+  sendReview: (b) => {
+    const p = findProduct(b.dataset.pid);
+    const text = $('rvText').value.trim();
+    if (!text) { alert('Please write a short review first.'); return; }
+    const msg = 'Review for ' + p.name + ': ' + $('rvStars').value + ' stars\n' + text + '\n— ' + $('rvName').value.trim();
+    window.open(waLink(msg), '_blank', 'noopener');
+  },
+  adminLogin: () => {
+    if (($('admPass') || {}).value === ADMIN_PASSWORD) {
+      A.unlocked = true; sessionStorage.setItem('ww_admin', '1'); renderAll();
+    } else {
+      $('admErr').textContent = 'Wrong password.';
+    }
+  },
+  adminLock: () => { A.unlocked = false; sessionStorage.removeItem('ww_admin'); renderAll(); },
+  saveDraft: () => saveDraft(),
+  downloadProducts: () => downloadProducts(),
+  addProduct: () => {
+    collectDraft();
+    adminDraft().products.push({id: 'p' + Date.now().toString(36), name: '', description: '', pet: 'dogs', category: 'Food', price: null, image: '', active: true});
+    renderAll();
+  },
+  removeProduct: (b) => {
+    collectDraft();
+    const d = adminDraft();
+    const p = d.products[Number(b.dataset.i)];
+    if (!p || !confirm('Remove ' + (p.name || 'this product') + '?')) return;
+    d.products.splice(Number(b.dataset.i), 1);
+    delete d.reviews[p.id];
+    renderAll();
+  },
+  resetDraft: () => {
+    if (!confirm('Throw away the changes you made here and go back to the website version?')) return;
+    store.set('ww_admin_draft', null);
+    A.draft = null; A.msg = '';
+    renderAll();
+  },
+  addReview: () => {
+    collectDraft();
+    const d = adminDraft();
+    const pid = $('rvPid').value, text = $('rvText').value.trim();
+    if (!text) { A.msg = 'Please write the review text.'; return renderAll(); }
+    d.reviews[pid] = d.reviews[pid] || [];
+    d.reviews[pid].push({name: $('rvName').value.trim() || 'Customer', rating: Number($('rvStars').value), text: text, date: new Date().toISOString().slice(0, 10)});
+    A.msg = 'Review added. Save changes, then download products.js.';
+    renderAll();
+  },
+  removeReview: (b) => {
+    collectDraft();
+    const list = adminDraft().reviews[b.dataset.pid] || [];
+    list.splice(Number(b.dataset.idx), 1);
+    renderAll();
+  }
 };
 
 document.addEventListener('click', (ev) => {
@@ -816,22 +760,21 @@ document.addEventListener('click', (ev) => {
   if (d.remove) { delete S.cart[d.remove]; saveCart(); return renderAll(); }
   if (d.reviews) return openReviews(d.reviews);
   if (d.mode) { S.mode = d.mode; return renderAll(); }
-  if (d.atab) { S.admin.tab = d.atab; S.admin.msg = ''; return renderAll(); }
-  if (d.edit) { S.admin.editId = d.edit; S.admin.msg = ''; return renderAll(); }
-  if (d.saveOrder) return saveOrder(d.saveOrder);
   if (d.act && actions[d.act]) return actions[d.act](b);
 });
 document.addEventListener('input', (ev) => {
   const id = ev.target.id;
   if (id === 'search') { S.q = ev.target.value; renderGrid(); }
-  else if (id === 'address' || id === 'notes' || id === 'payRef') S.draft[id] = ev.target.value;
+  else if (id === 'address' || id === 'notes') S.draft[id] = ev.target.value;
+});
+document.addEventListener('change', (ev) => {
+  if (ev.target.id === 'sort') { S.sort = ev.target.value; renderGrid(); }
 });
 document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') closeOverlays(); });
 window.addEventListener('hashchange', renderAll);
 
 /* ===== Start ===== */
 renderAll();
-loadProducts().then(renderAll);
 </script>
 </body>
 </html>
